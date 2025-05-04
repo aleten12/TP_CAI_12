@@ -24,9 +24,27 @@ namespace TemplateTPCorto
             String usuario = txtUsuario.Text;
             String password = txtPassword.Text;
 
+            if (password.Length < 8)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.");
+                return; 
+            }
+
             LoginNegocio loginNegocio = new LoginNegocio();
             Credencial credencial = loginNegocio.login(usuario, password);
 
+            if (credencial != null)
+            {
+                MessageBox.Show("El usuario es válido.");
+            }
+
+            if (credencial == null)
+            {
+                MessageBox.Show("El usuario es inválido.");
+            }
+
         }
+
+       
     }
 }

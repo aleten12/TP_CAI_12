@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DataBase\Tablas\autorizacion.csv" />
-    <None Include="DataBase\Tablas\credenciales.csv" />
+    <None Include="DataBase\Tablas\credenciales.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DataBase\Tablas\login_intentos.csv" />
     <None Include="DataBase\Tablas\operacion_cambio_credencial.csv" />
     <None Include="DataBase\Tablas\operacion_cambio_persona.csv" />

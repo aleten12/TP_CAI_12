@@ -20,7 +20,7 @@ namespace Negocio
             {
                 return credencial;
             }
-            return null;
+            return null; 
         }
     }
 }

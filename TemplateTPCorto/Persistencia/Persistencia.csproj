@@ -58,7 +58,9 @@
     <None Include="DataBase\Tablas\perfil_rol.csv" />
     <None Include="DataBase\Tablas\persona.csv" />
     <None Include="DataBase\Tablas\rol.csv" />
-    <None Include="DataBase\Tablas\usuario_bloqueado.csv" />
+    <None Include="DataBase\Tablas\usuario_bloqueado.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DataBase\Tablas\usuario_perfil.csv" />
   </ItemGroup>
   <ItemGroup>

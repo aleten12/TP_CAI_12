@@ -32,6 +32,24 @@ namespace Persistencia
             }
             return null; // No se encontró el usuario
         }
-        
+
+        public bool UsuarioBloqueado(string legajo)
+        {
+            DataBaseUtils dbUtils = new DataBaseUtils();
+            List<string> bloqueados = dbUtils.BuscarRegistro("usuario_bloqueado.csv");
+
+            for (int i = 1; i < bloqueados.Count; i++) // Salteamos la cabecera
+            {
+                string legajoCsv = bloqueados[i].Trim();
+
+                if (legajoCsv == legajo.Trim())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }

@@ -27,24 +27,33 @@ namespace TemplateTPCorto
             if (password.Length < 8)
             {
                 MessageBox.Show("La contraseña debe tener al menos 8 caracteres.");
-                return; 
+                return;
             }
 
             LoginNegocio loginNegocio = new LoginNegocio();
             Credencial credencial = loginNegocio.login(usuario, password);
 
-            if (credencial != null)
+            if (loginNegocio.EsBloqueado)
             {
-                MessageBox.Show("El usuario es válido.");
+                MessageBox.Show("El usuario está bloqueado.");
+                return;
             }
 
-            if (credencial == null)
+            if (credencial != null)
+            {
+
+                MessageBox.Show("El usuario es válido.");
+            }
+            else
             {
                 MessageBox.Show("El usuario es inválido.");
             }
-
         }
 
-       
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

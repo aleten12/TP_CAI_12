@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Datos;
 
 namespace Persistencia.DataBase
 {
@@ -104,5 +105,9 @@ namespace Persistencia.DataBase
             }
         }
 
+        public void ActualizarCredencial(Credencial credencial)
+        {
+
+        }
     }
 }

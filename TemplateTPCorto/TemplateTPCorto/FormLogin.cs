@@ -39,15 +39,27 @@ namespace TemplateTPCorto
                 return;
             }
 
-            if (credencial != null)
+            if (credencial == null)
             {
 
-                MessageBox.Show("El usuario es válido.");
-            }
-            else
-            {
                 MessageBox.Show("El usuario es inválido.");
             }
+        
+          
+            DialogResult respuesta = MessageBox.Show(
+           "¿Querés cambiar tu contraseña ahora?",
+            "Cambio de contraseña",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (respuesta == DialogResult.Yes)
+            {
+                FormContrasena formContrasena = new FormContrasena();
+                formContrasena.UsuarioAutenticado = credencial;
+                formContrasena.Show();
+
+            }
+
         }
 
 

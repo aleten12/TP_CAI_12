@@ -8,22 +8,20 @@ using System.Threading.Tasks;
 
 namespace Datos.Login
 {
-    internal class Contrasena
+    public class Contrasena
     {
         private string _contrasenaActual;
-        private string _contrasenaAnterior;
-        private DateTime _fechaUltimaContrasena;
+        private string _contrasenaNueva;
+        private DateTime _fechaUltimoLogin;
 
         public string ContrasenaActual { get => _contrasenaActual; set => _contrasenaActual = value; }
-        public string ContrasenaAnterior {  get => _contrasenaAnterior; set =>  _contrasenaAnterior = value;}
-        public DateTime FechaUltimaContrasena { get =>  _fechaUltimaContrasena; set => _fechaUltimaContrasena = value;}
+        public string ContrasenaNueva {  get => _contrasenaNueva; set =>  _contrasenaNueva = value;}
+        public DateTime FechaUltimaLogin { get =>  _fechaUltimoLogin; set => _fechaUltimoLogin = value;}
 
-        public Contrasena (string registro)
+        public Contrasena(Credencial credencial)
         {
-            String[] datos = registro.Split(';');
-            this._contrasenaActual = datos[0];
-            this._contrasenaAnterior = datos[1];
-            this._fechaUltimaContrasena = DateTime.ParseExact(datos[2], "d/M/yyyy", CultureInfo.InvariantCulture);
+            _contrasenaActual = credencial.Contrasena;
+            _fechaUltimoLogin = credencial.FechaUltimoLogin;
         }
     }
 }

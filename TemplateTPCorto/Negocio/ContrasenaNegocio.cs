@@ -27,7 +27,7 @@ namespace Negocio
             credencial.FechaUltimoLogin = DateTime.Now;
 
             DataBaseUtils db = new DataBaseUtils();
-            db.ActualizarCredencial(credencial);
+            db.ActualizarCredencial(credencial, "credenciales.csv");
 
             return true;
         }

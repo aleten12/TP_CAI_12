@@ -43,7 +43,6 @@
             this.lblContraseña.Size = new System.Drawing.Size(143, 20);
             this.lblContraseña.TabIndex = 0;
             this.lblContraseña.Text = "Contraseña nueva ";
-            this.lblContraseña.Click += new System.EventHandler(this.lblContraseña_Click);
             // 
             // txtContrasenaNueva
             // 
@@ -51,7 +50,6 @@
             this.txtContrasenaNueva.Name = "txtContrasenaNueva";
             this.txtContrasenaNueva.Size = new System.Drawing.Size(271, 26);
             this.txtContrasenaNueva.TabIndex = 1;
-            this.txtContrasenaNueva.TextChanged += new System.EventHandler(this.txtContrasenaNueva_TextChanged);
             // 
             // btbActualizarContraseña
             // 
@@ -71,7 +69,6 @@
             this.lblContraseñaActual.Size = new System.Drawing.Size(139, 20);
             this.lblContraseñaActual.TabIndex = 3;
             this.lblContraseñaActual.Text = "Contraseña actual";
-            this.lblContraseñaActual.Click += new System.EventHandler(this.lblContraseñaActual_Click);
             // 
             // txtContrasenaActual
             // 
@@ -79,7 +76,6 @@
             this.txtContrasenaActual.Name = "txtContrasenaActual";
             this.txtContrasenaActual.Size = new System.Drawing.Size(271, 26);
             this.txtContrasenaActual.TabIndex = 4;
-            this.txtContrasenaActual.TextChanged += new System.EventHandler(this.txtContrasenaActual_TextChanged);
             // 
             // FormContrasena
             // 

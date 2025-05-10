@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Datos;
 
 namespace Persistencia.DataBase
@@ -105,9 +106,50 @@ namespace Persistencia.DataBase
             }
         }
 
-        public void ActualizarCredencial(Credencial credencial)
+        public void ActualizarCredencial(Credencial credencial, string nombreArchivo)
         {
+            string rutaArchivo = @"C:\Users\flore\Documents\GitHub\TPIntegradorCorto\TemplateTPCorto\Persistencia\DataBase\Tablas\";
+            rutaArchivo = rutaArchivo + nombreArchivo;
 
+            try
+            {
+                // Leer todas las líneas del archivo
+                List<string> listado = File.ReadAllLines(rutaArchivo).ToList();
+                bool encontrado = false;
+
+                // Construir la nueva línea con los datos del objeto Credencial
+                string nuevaLinea = string.Join(";", new string[]
+                {
+                    credencial.Legajo,
+                    credencial.NombreUsuario,
+                    credencial.Contrasena,
+                    credencial.FechaAlta.ToString("d/M/yyyy"),
+                    credencial.FechaUltimoLogin.ToString("d/M/yyyy")
+                });
+
+                for (int i = 0; i < listado.Count; i++)
+                {
+                    var campos = listado[i].Split(';');
+
+                    if (campos[0] == credencial.Legajo)
+                    {
+                        listado[i] = nuevaLinea;
+                        encontrado = true;
+                        break;
+                    }
+                }
+
+                if (encontrado)
+                {
+                    File.WriteAllLines(rutaArchivo, listado);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al intentar actualizar el registro:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+                Console.WriteLine($"Pila de errores: {e.StackTrace}");
+            }
         }
     }
 }

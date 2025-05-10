@@ -47,7 +47,9 @@
     <Compile Include="WebService\Utils\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataBase\Tablas\autorizacion.csv" />
+    <None Include="DataBase\Tablas\autorizacion.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="DataBase\Tablas\credenciales.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -108,14 +108,14 @@ namespace Persistencia.DataBase
 
         public void ActualizarCredencial(Credencial credencial, string nombreArchivo)
         {
-            string rutaArchivo = @"C:\Users\flore\Documents\GitHub\TPIntegradorCorto\TemplateTPCorto\Persistencia\DataBase\Tablas\";
-            rutaArchivo = rutaArchivo + nombreArchivo;
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\credenciales.csv");
+            rutaArchivo = Path.GetFullPath(rutaArchivo); 
 
             try
             {
                 // Leer todas las líneas del archivo
                 List<string> listado = File.ReadAllLines(rutaArchivo).ToList();
-                bool encontrado = false;
+                bool encontrado = false; 
 
                 // Construir la nueva línea con los datos del objeto Credencial
                 string nuevaLinea = string.Join(";", new string[]

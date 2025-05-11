@@ -63,6 +63,5 @@ namespace Negocio
             }
             return false;
         }
-
     }
 }

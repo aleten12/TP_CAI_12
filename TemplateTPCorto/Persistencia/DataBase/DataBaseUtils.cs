@@ -4,17 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Datos;
 
 namespace Persistencia.DataBase
 {
     public class DataBaseUtils
     {
-        string archivoCsv = @"C:\Users\p044755\source\repos\TemplateTPIntegrador\TemplateTPCorto\Persistencia\DataBase\Tablas\";
+        private readonly string rutaBase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataBase", "Tablas");
+
+
         public List<String> BuscarRegistro(String nombreArchivo)
         {
-            archivoCsv = archivoCsv + nombreArchivo; // Cambia esta ruta al archivo CSV que deseas leer
-
-            String rutaArchivo = Path.GetFullPath(archivoCsv); // Normaliza la ruta
+            string rutaArchivo = Path.Combine(rutaBase, nombreArchivo);
 
             List<String> listado = new List<String>();
 
@@ -40,16 +42,14 @@ namespace Persistencia.DataBase
         // Método para borrar un registro
         public void BorrarRegistro(string id, String nombreArchivo)
         {
-            archivoCsv = archivoCsv + nombreArchivo; // Cambia esta ruta al archivo CSV que deseas leer
-
-            String rutaArchivo = Path.GetFullPath(archivoCsv); // Normaliza la ruta
-
+            string rutaArchivo = Path.Combine(rutaBase, nombreArchivo);// Cambia esta ruta al archivo CSV que deseas leer
+          
             try
             {
                 // Verificar si el archivo existe
                 if (!File.Exists(rutaArchivo))
                 {
-                    Console.WriteLine("El archivo no existe: " + archivoCsv);
+                    Console.WriteLine("El archivo no existe: " + rutaArchivo);
                     return;
                 }
 
@@ -64,7 +64,7 @@ namespace Persistencia.DataBase
                 }).ToList();
 
                 // Sobrescribir el archivo con las líneas restantes
-                File.WriteAllLines(archivoCsv, registrosRestantes);
+                File.WriteAllLines(rutaArchivo, registrosRestantes);
 
                 Console.WriteLine($"Registro con ID {id} borrado correctamente.");
             }
@@ -79,7 +79,7 @@ namespace Persistencia.DataBase
         // Método para agregar un registro
         public void AgregarRegistro(string nombreArchivo, string nuevoRegistro)
         {
-            string archivoCsv = Path.Combine(Directory.GetCurrentDirectory(), "Persistencia", "Datos", nombreArchivo);
+            string archivoCsv = Path.Combine(Directory.GetCurrentDirectory(), "DataBase", "Tablas", nombreArchivo);
 
             try
             {
@@ -106,5 +106,50 @@ namespace Persistencia.DataBase
             }
         }
 
+        public void ActualizarCredencial(Credencial credencial, string nombreArchivo)
+        {
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\credenciales.csv");
+            rutaArchivo = Path.GetFullPath(rutaArchivo); 
+
+            try
+            {
+                // Leer todas las líneas del archivo
+                List<string> listado = File.ReadAllLines(rutaArchivo).ToList();
+                bool encontrado = false; 
+
+                // Construir la nueva línea con los datos del objeto Credencial
+                string nuevaLinea = string.Join(";", new string[]
+                {
+                    credencial.Legajo,
+                    credencial.NombreUsuario,
+                    credencial.Contrasena,
+                    credencial.FechaAlta.ToString("d/M/yyyy"),
+                    credencial.FechaUltimoLogin.ToString("d/M/yyyy")
+                });
+
+                for (int i = 0; i < listado.Count; i++)
+                {
+                    var campos = listado[i].Split(';');
+
+                    if (campos[0] == credencial.Legajo)
+                    {
+                        listado[i] = nuevaLinea;
+                        encontrado = true;
+                        break;
+                    }
+                }
+
+                if (encontrado)
+                {
+                    File.WriteAllLines(rutaArchivo, listado);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al intentar actualizar el registro:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+                Console.WriteLine($"Pila de errores: {e.StackTrace}");
+            }
+        }
     }
 }

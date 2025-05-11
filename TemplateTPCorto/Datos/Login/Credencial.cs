@@ -21,7 +21,7 @@ namespace Datos
         public DateTime FechaAlta { get => _fechaAlta; set => _fechaAlta = value; }
         public DateTime FechaUltimoLogin { get => _fechaUltimoLogin; set => _fechaUltimoLogin = value; }
 
-
+        public DateTime FechaUltimoCambioContrasena { get; set; }
         public Credencial(String registro)
         {
             String[] datos = registro.Split(';');

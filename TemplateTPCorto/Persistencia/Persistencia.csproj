@@ -47,17 +47,39 @@
     <Compile Include="WebService\Utils\WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataBase\Tablas\autorizacion.csv" />
-    <None Include="DataBase\Tablas\credenciales.csv" />
-    <None Include="DataBase\Tablas\login_intentos.csv" />
-    <None Include="DataBase\Tablas\operacion_cambio_credencial.csv" />
-    <None Include="DataBase\Tablas\operacion_cambio_persona.csv" />
-    <None Include="DataBase\Tablas\perfil.csv" />
-    <None Include="DataBase\Tablas\perfil_rol.csv" />
-    <None Include="DataBase\Tablas\persona.csv" />
-    <None Include="DataBase\Tablas\rol.csv" />
-    <None Include="DataBase\Tablas\usuario_bloqueado.csv" />
-    <None Include="DataBase\Tablas\usuario_perfil.csv" />
+    <None Include="DataBase\Tablas\autorizacion.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="DataBase\Tablas\credenciales.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="DataBase\Tablas\login_intentos.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\operacion_cambio_credencial.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\operacion_cambio_persona.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\perfil.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\perfil_rol.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\persona.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\rol.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\usuario_bloqueado.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DataBase\Tablas\usuario_perfil.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">

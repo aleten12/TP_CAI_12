@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Datos;
 using Persistencia;
 using Persistencia.DataBase;
+using Negocio;
+
 
 namespace Negocio
 {
@@ -44,15 +46,22 @@ namespace Negocio
 
         public bool DebeForzarCambio(Credencial credencial)
         {
-            return EstaExpirada(credencial.FechaUltimoLogin);
+            // Si la fecha de último login no es válida o paso más de 30 días sin ingresar, forzar el cambio
+            if (credencial.FechaUltimoLogin == DateTime.MinValue || EstaExpirada(credencial.FechaUltimoLogin))
+            {
+                return true;
+            }
+            return false;
         }
+
         public bool EstaExpirada(DateTime fechaUltimoLogin)
         {
+            // Si han pasado más de 30 días desde el último login
             if ((DateTime.Now - fechaUltimoLogin).TotalDays > 30)
             {
                 return true;
             }
-            else { return false; }
+            return false;
         }
 
     }

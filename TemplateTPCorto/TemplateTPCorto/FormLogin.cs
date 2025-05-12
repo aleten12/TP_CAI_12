@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Microsoft.Win32;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TemplateTPCorto
 {
@@ -23,6 +25,11 @@ namespace TemplateTPCorto
         {
             String usuario = txtUsuario.Text;
             String password = txtPassword.Text;
+
+            if (usuario.Length < 1)
+            {
+                MessageBox.Show("El usuario debe estar completo");
+            }
 
             if (password.Length < 8)
             {
@@ -42,19 +49,7 @@ namespace TemplateTPCorto
             if (credencial == null)
             {
 
-                MessageBox.Show("Usuario o contraseña inválido");
-            }
-
-            
-            // Verificar si es primer login
-            if (loginNegocio.EsPrimerLogin)
-            {
-                MessageBox.Show("Este es tu primer ingreso. Debés cambiar tu contraseña.", "Primer Login", MessageBoxButtons.OK);
-
-                FormContrasena formContrasena = new FormContrasena();
-                formContrasena.UsuarioAutenticado = credencial;
-                formContrasena.Show();
-                this.Hide();
+                MessageBox.Show("El usuario es inválido.");
                 return;
             }
 

@@ -45,6 +45,19 @@ namespace TemplateTPCorto
                 MessageBox.Show("El usuario es inválido.");
             }
 
+            
+            // Verificar si es primer login
+            if (loginNegocio.EsPrimerLogin)
+            {
+                MessageBox.Show("Este es tu primer ingreso. Debés cambiar tu contraseña.", "Primer Login", MessageBoxButtons.OK);
+
+                FormContrasena formContrasena = new FormContrasena();
+                formContrasena.UsuarioAutenticado = credencial;
+                formContrasena.Show();
+                this.Hide(); // opcional
+                return;
+            }
+
 
             ContrasenaNegocio contrasenaNegocio = new ContrasenaNegocio();
 

@@ -47,10 +47,8 @@ namespace Negocio
                 return credencial;
             }
 
-            // 3. Contraseña incorrecta → registrar intento fallido
             RegistrarIntentoFallido(credencial.Legajo);
 
-            // 4. Verificar si debe bloquearse
             if (ObtenerIntentosFallidos(credencial.Legajo) >= MAX_INTENTOS)
             {
                 BloquearUsuario(credencial.Legajo);

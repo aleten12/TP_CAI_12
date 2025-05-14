@@ -52,18 +52,19 @@ namespace Persistencia
 
         public bool UsuarioPrimerLogin(List<string> registros, string username)
         {
-            DataBaseUtils dbUtils = new DataBaseUtils();
-            List<string> primerLogin = dbUtils.BuscarRegistro("credenciales.csv");
-
-            foreach (var registro in registros.Skip(1)) // Salta la primer linea de cabecera
+            foreach (string registro in registros.Skip(1)) // salta encabezado
             {
                 string[] campos = registro.Split(';');
 
-                if (campos[1].Equals(username) && string.IsNullOrEmpty(campos[4]))
+                string legajo = campos[1];
+                string fechaUltimoLogin = campos[4];
+
+                if (legajo.Equals(username) && (fechaUltimoLogin == null || fechaUltimoLogin.Trim() == ""))
                 {
                     return true;
                 }
             }
+
             return false; // No es primer login
         }
 

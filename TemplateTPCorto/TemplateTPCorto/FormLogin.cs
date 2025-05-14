@@ -42,7 +42,7 @@ namespace TemplateTPCorto
             if (credencial == null)
             {
 
-                MessageBox.Show("El usuario es inválido.");
+                MessageBox.Show("Usuario o contraseña inválido");
             }
 
             
@@ -54,7 +54,7 @@ namespace TemplateTPCorto
                 FormContrasena formContrasena = new FormContrasena();
                 formContrasena.UsuarioAutenticado = credencial;
                 formContrasena.Show();
-                this.Hide(); // opcional
+                this.Hide();
                 return;
             }
 

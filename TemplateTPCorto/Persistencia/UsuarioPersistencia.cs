@@ -50,6 +50,23 @@ namespace Persistencia
             return false;
         }
 
+        public bool UsuarioPrimerLogin(List<string> registros, string username)
+        {
+            DataBaseUtils dbUtils = new DataBaseUtils();
+            List<string> primerLogin = dbUtils.BuscarRegistro("credenciales.csv");
+
+            foreach (var registro in registros.Skip(1)) // Salta la primer linea de cabecera
+            {
+                string[] campos = registro.Split(';');
+
+                if (campos[1].Equals(username) && string.IsNullOrEmpty(campos[4]))
+                {
+                    return true;
+                }
+            }
+            return false; // No es primer login
+        }
+
 
     }
 }

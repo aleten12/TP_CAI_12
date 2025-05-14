@@ -11,6 +11,8 @@ namespace Negocio
     public class LoginNegocio
     {
         public bool EsBloqueado { get; set; } = false;
+        public bool EsPrimerLogin { get; set; } = false;
+
 
         public Credencial login(String usuario, String password)
         {
@@ -33,6 +35,14 @@ namespace Negocio
             if (credencial.Contrasena.Equals(password))
             {
                 return credencial;
+            }
+            // Ver si es primer login
+            List<string> registros = File.ReadAllLines("credenciales.csv").ToList();
+
+            if (usuarioPersistencia.UsuarioPrimerLogin(registros, credencial.Legajo))
+            {
+                EsPrimerLogin = true;
+                return null;
             }
 
             return null;

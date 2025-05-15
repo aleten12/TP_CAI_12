@@ -53,9 +53,9 @@
     <Content Include="DataBase\Tablas\credenciales.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="DataBase\Tablas\login_intentos.csv">
+    <Content Include="DataBase\Tablas\login_intentos.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="DataBase\Tablas\operacion_cambio_credencial.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -74,9 +74,9 @@
     <None Include="DataBase\Tablas\rol.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="DataBase\Tablas\usuario_bloqueado.csv">
+    <Content Include="DataBase\Tablas\usuario_bloqueado.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="DataBase\Tablas\usuario_perfil.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -61,28 +61,32 @@ namespace TemplateTPCorto
 
             ContrasenaNegocio contrasenaNegocio = new ContrasenaNegocio();
 
-            // Verificar si el cambio de contraseña debe ser forzado
-            if (contrasenaNegocio.DebeForzarCambio(credencial))
+            if (credencial != null)
             {
-                DialogResult respuesta = MessageBox.Show(
-                   "Han pasado más de 30 días desde el último cambio de contraseña. ¿Quieres cambiar tu contraseña ahora?",
-                    "Cambio de contraseña",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (respuesta == DialogResult.Yes)
+                // Verificar si el cambio de contraseña debe ser forzado
+                if (contrasenaNegocio.DebeForzarCambio(credencial))
                 {
-                    // Abrir el formulario de cambio de contraseña
-                    FormContrasena formContrasena = new FormContrasena();
-                    formContrasena.UsuarioAutenticado = credencial;
-                    formContrasena.Show();
+                    DialogResult respuesta = MessageBox.Show(
+                       "Han pasado más de 30 días desde el último cambio de contraseña. ¿Quieres cambiar tu contraseña ahora?",
+                        "Cambio de contraseña",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        // Abrir el formulario de cambio de contraseña
+                        FormContrasena formContrasena = new FormContrasena();
+                        formContrasena.UsuarioAutenticado = credencial;
+                        formContrasena.Show();
+                    }
+                    else
+                    {
+                        // Si no es necesario el cambio de contraseña, continuar con el flujo normal
+                        MessageBox.Show("Ingreso exitoso.");
+                    }
                 }
             }
-            else
-            {
-                // Si no es necesario el cambio de contraseña, continuar con el flujo normal
-                MessageBox.Show("Ingreso exitoso.");
-            }
+            
 
         }
 

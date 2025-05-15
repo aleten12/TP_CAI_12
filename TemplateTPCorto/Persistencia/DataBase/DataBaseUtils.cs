@@ -106,6 +106,24 @@ namespace Persistencia.DataBase
             }
         }
 
+        public void SobrescribirArchivo(string nombreArchivo, List<string> nuevasLineas)
+        {
+            string rutaRelativa = Path.Combine("..", "..", "..", "Persistencia", "DataBase", "Tablas", nombreArchivo);
+            string rutaCompleta = Path.GetFullPath(rutaRelativa);
+
+            try
+            {
+                File.WriteAllLines(rutaCompleta, nuevasLineas);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al sobrescribir el archivo:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+                Console.WriteLine($"Pila de errores: {e.StackTrace}");
+            }
+        }
+
+
         public void ActualizarCredencial(Credencial credencial, string nombreArchivo)
         {
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\credenciales.csv");

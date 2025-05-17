@@ -42,8 +42,9 @@ namespace Persistencia.DataBase
         // Método para borrar un registro
         public void BorrarRegistro(string id, String nombreArchivo)
         {
-            string rutaArchivo = Path.Combine(rutaBase, nombreArchivo);// Cambia esta ruta al archivo CSV que deseas leer
-          
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
+            rutaArchivo = Path.GetFullPath(rutaArchivo);
+
             try
             {
                 // Verificar si el archivo existe
@@ -108,7 +109,7 @@ namespace Persistencia.DataBase
 
         public void SobrescribirArchivo(string nombreArchivo, List<string> nuevasLineas)
         {
-            string rutaRelativa = Path.Combine("..", "..", "..", "Persistencia", "DataBase", "Tablas", nombreArchivo);
+            string rutaRelativa = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
             string rutaCompleta = Path.GetFullPath(rutaRelativa);
 
             try
@@ -126,7 +127,7 @@ namespace Persistencia.DataBase
 
         public void ActualizarCredencial(Credencial credencial, string nombreArchivo)
         {
-            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\credenciales.csv");
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
             rutaArchivo = Path.GetFullPath(rutaArchivo); 
 
             try

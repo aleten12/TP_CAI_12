@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Datos.Seguridad;
+using Persistencia;
 
 namespace TemplateTPCorto
 {
@@ -21,6 +23,7 @@ namespace TemplateTPCorto
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+
             String usuario = txtUsuario.Text;
             String password = txtPassword.Text;
 
@@ -60,7 +63,7 @@ namespace TemplateTPCorto
 
 
             ContrasenaNegocio contrasenaNegocio = new ContrasenaNegocio();
-
+            
             if (credencial != null)
             {
                 // Verificar si el cambio de contraseña debe ser forzado
@@ -86,14 +89,28 @@ namespace TemplateTPCorto
                     }
                 }
             }
-            
-
-        }
 
 
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
-
+            //VER BIEN LA CONDICION PARA QUE INGRESE OK
+            //PARTE DE ROLES Y PERFILES
+            if (credencial != null)
+            {
+                SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
+                string rolUsuario = seguridadPersistencia.ObtenerPerfil(credencial.Legajo);
+                if (rolUsuario == "Supervisor")
+                {
+                    MessageBox.Show("Bienvenido, Supervisor.");
+                    FormSupervisor formSupervisor = new FormSupervisor();
+                    formSupervisor.Show();
+                    this.Hide();
+                    return;
+                }
+                else
+                {
+                    //VER OTROS PERFILES QUE FALTAN AGREGAR
+                    MessageBox.Show("Ingreso exitoso.");
+                }
+            }
         }
     }
 }

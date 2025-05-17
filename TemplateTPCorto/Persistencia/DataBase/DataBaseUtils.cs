@@ -39,6 +39,31 @@ namespace Persistencia.DataBase
             return listado;
         }
 
+        public List<String> BuscarDatosPersistencia(String nombreArchivo)
+        {
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
+            rutaArchivo = Path.GetFullPath(rutaArchivo);
+            List<String> listado = new List<String>();
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(rutaArchivo))
+                {
+                    string linea;
+                    while ((linea = sr.ReadLine()) != null)
+                    {
+                        listado.Add(linea);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo leer el archivo:");
+                Console.WriteLine(e.Message);
+            }
+            return listado;
+        }
+
         // Método para borrar un registro
         public void BorrarRegistro(string id, String nombreArchivo)
         {
@@ -174,4 +199,6 @@ namespace Persistencia.DataBase
             }
         }
     }
+
+
 }

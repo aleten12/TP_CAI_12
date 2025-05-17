@@ -17,20 +17,19 @@ namespace Negocio
 
         private int MAX_INTENTOS = 3;
 
-        public Credencial login(String usuario, String password)
+        private readonly DataBaseUtils db = new DataBaseUtils();
+
+        public Credencial login(string usuario, string password)
         {
             UsuarioPersistencia usuarioPersistencia = new UsuarioPersistencia();
             Credencial credencial = usuarioPersistencia.login(usuario);
-            DataBaseUtils db = new DataBaseUtils();
-            List<String> registros = db.BuscarRegistro("credenciales.csv");
 
             if (credencial == null)
             {
-                return null;
+                return null; 
             }
 
-            // Ver si esta bloqueado
-            if (usuarioPersistencia.UsuarioBloqueado(credencial.Legajo))
+            if (UsuarioEstaBloqueado(credencial.Legajo))
             {
                 EsBloqueado = true;
                 return null;
@@ -38,120 +37,66 @@ namespace Negocio
 
             if (credencial.Contrasena == password)
             {
-                // Verificar si es primer login
-                if (usuarioPersistencia.UsuarioPrimerLogin(registros, credencial.Legajo))
+                if (usuarioPersistencia.UsuarioPrimerLogin(credencial.Legajo))
                 {
-                    EsPrimerLogin = true;
+                    EsPrimerLogin = true; 
                 }
 
-                // Resetear intentos al loguear correctamente
-                ResetearIntentos(credencial.Legajo);
+                LimpiarIntentos(credencial.Legajo);
                 return credencial;
-
-            } 
+            }
             else
-            { 
+            {
+                Console.WriteLine("Login fallido para legajo: " + credencial.Legajo);
                 RegistrarIntentoFallido(credencial.Legajo);
 
-                if (ObtenerIntentosFallidos(credencial.Legajo) >= MAX_INTENTOS)
+                int intentos = ContarIntentosFallidos(credencial.Legajo);
+                Console.WriteLine($"Intentos fallidos actuales: {intentos}");
+
+                if (intentos >= MAX_INTENTOS)
                 {
+                    Console.WriteLine($"Bloqueando usuario: {credencial.Legajo}");
                     BloquearUsuario(credencial.Legajo);
                     EsBloqueado = true;
                 }
+
                 return null;
             }
         }
+
+        private bool UsuarioEstaBloqueado(string legajo)
+        {
+            List<string> bloqueados = db.BuscarRegistro("usuario_bloqueado.csv");
+            return bloqueados.Any(leg => leg.Trim() == legajo);
+        }
+
         private void RegistrarIntentoFallido(string legajo)
         {
-            DataBaseUtils db = new DataBaseUtils();
-            List<string> registro = db.BuscarRegistro("login_intentos.csv");
-
-            bool encontrado = false;
-
-            for (int i = 0; i < registro.Count; i++)
-            {
-                string linea = registro[i];
-                if (linea.StartsWith(legajo + ";"))
-                {
-                    string[] partes = linea.Split(';');
-                    int cantidad = int.Parse(partes[1]);
-                    cantidad += 1;
-                    string nuevaLinea = $"{legajo};{cantidad};{DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-                    registro[i] = nuevaLinea;
-                    encontrado = true;
-                    break;
-                }
-            }
-
-            if (!encontrado)
-            {
-                string nuevaLinea = $"{legajo};1;{DateTime.Now:yyyy-MM-dd HH:mm:ss}";
-                registro.Add(nuevaLinea);
-            }
-
-            db.SobrescribirArchivo("login_intentos.csv", registro);
-
+            string linea = $"{legajo};{DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+            db.AgregarRegistro("login_intentos.csv", linea);
         }
 
-        private int ObtenerIntentosFallidos(string legajo)
+        private int ContarIntentosFallidos(string legajo)
         {
-            if (!File.Exists("login_intentos.csv"))
-            { return 0; }
-
-            DataBaseUtils db = new DataBaseUtils();
-            List<string> registro = db.BuscarRegistro("login_intentos.csv");
-
-            foreach (string linea in registro)
-            {
-                var partes = linea.Split(';');
-                if (partes[0] == legajo)
-                {
-                    return int.Parse(partes[1]);
-                }
-            }
-
-            return 0; // Si no hay intentos, asumimos 0
+            List<string> intentosArchivo = db.BuscarRegistro("login_intentos.csv");
+            return intentosArchivo.Count(linea => linea.Trim().StartsWith(legajo.Trim() + ";"));
         }
 
-        private void ResetearIntentos(string legajo)
+        private void LimpiarIntentos(string legajo)
         {
-            DataBaseUtils db = new DataBaseUtils();
-            List<string> registro = db.BuscarRegistro("login_intentos.csv");
-
-            bool actualizado = false;
-
-            for (int i = 0; i < registro.Count; i++)
-            {
-                var partes = registro[i].Split(';');
-                if (partes[0] == legajo)
-                {
-                    string nuevaLinea = $"{legajo};0;{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
-                    registro[i] = nuevaLinea;
-                    actualizado = true;
-                    break;
-                }
-            }
-
-            if (!actualizado)
-            {
-                // Por si no existía registro antes
-                registro.Add($"{legajo};0;{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
-            }
-
-            db.SobrescribirArchivo("login_intentos.csv", registro);
+            List<string> intentos = db.BuscarRegistro("login_intentos.csv");
+            List<string> otrosLegajos = intentos.Where(l => !l.StartsWith(legajo + ";")).ToList(); //Filtra los intentos de los otros usuarios y "borra"/no guarada el del legajo
+            db.SobrescribirArchivo("login_intentos.csv", otrosLegajos);
         }
 
         private void BloquearUsuario(string legajo)
         {
-            DataBaseUtils db = new DataBaseUtils();
             List<string> bloqueados = db.BuscarRegistro("usuario_bloqueado.csv");
-
             if (!bloqueados.Contains(legajo))
             {
                 bloqueados.Add(legajo);
                 db.SobrescribirArchivo("usuario_bloqueado.csv", bloqueados);
             }
-
         }
 
     }

@@ -50,18 +50,21 @@ namespace Persistencia
             return false;
         }
 
-        public bool UsuarioPrimerLogin(List<string> registros, string username)
+        public bool UsuarioPrimerLogin(string legajo)
         {
-            foreach (string registro in registros.Skip(1)) // salta encabezado
+            DataBaseUtils db = new DataBaseUtils();
+            List<string> registros = db.BuscarRegistro("credenciales.csv");
+
+            foreach (string registro in registros.Skip(0)) // salta encabezado
             {
                 string[] campos = registro.Split(';');
 
-                string legajo = campos[1];
+                string legajoArchivo = campos[0];
                 string fechaUltimoLogin = campos[4];
 
-                if (legajo.Equals(username) && (fechaUltimoLogin == null || fechaUltimoLogin.Trim() == ""))
+                if (legajoArchivo.Equals(legajo) && string.IsNullOrWhiteSpace(fechaUltimoLogin))
                 {
-                    return true;
+                    return true; // Es primer login
                 }
             }
 

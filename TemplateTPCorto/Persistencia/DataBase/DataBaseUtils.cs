@@ -16,8 +16,8 @@ namespace Persistencia.DataBase
 
         public List<String> BuscarRegistro(String nombreArchivo)
         {
-            string rutaArchivo = Path.Combine(rutaBase, nombreArchivo);
-
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
+            rutaArchivo = Path.GetFullPath(rutaArchivo);
             List<String> listado = new List<String>();
 
             try
@@ -80,7 +80,8 @@ namespace Persistencia.DataBase
         // Método para agregar un registro
         public void AgregarRegistro(string nombreArchivo, string nuevoRegistro)
         {
-            string archivoCsv = Path.Combine(Directory.GetCurrentDirectory(), "DataBase", "Tablas", nombreArchivo);
+            string archivoCsv = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
+            archivoCsv = Path.GetFullPath(archivoCsv);
 
             try
             {

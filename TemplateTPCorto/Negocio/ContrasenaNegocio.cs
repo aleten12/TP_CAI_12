@@ -46,17 +46,23 @@ namespace Negocio
 
         public bool DebeForzarCambio(Credencial credencial)
         {
-            // Si la fecha de último login no es válida o paso más de 30 días sin ingresar, forzar el cambio
-            if (credencial.FechaUltimoLogin == DateTime.MinValue || EstaExpirada(credencial.FechaUltimoLogin))
+            // Si no hay fecha de último login, forzar el cambio
+            if (!credencial.FechaUltimoLogin.HasValue)
             {
                 return true;
             }
+
+            if (EstaExpirada(credencial.FechaUltimoLogin.Value))
+            {
+                return true;
+            }
+
             return false;
         }
 
         public bool EstaExpirada(DateTime fechaUltimoLogin)
         {
-            // Si han pasado más de 30 días desde el último login
+           
             if ((DateTime.Now - fechaUltimoLogin).TotalDays > 30)
             {
                 return true;

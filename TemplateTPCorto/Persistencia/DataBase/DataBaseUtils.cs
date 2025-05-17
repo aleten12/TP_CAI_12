@@ -144,7 +144,9 @@ namespace Persistencia.DataBase
                     credencial.NombreUsuario,
                     credencial.Contrasena,
                     credencial.FechaAlta.ToString("d/M/yyyy"),
-                    credencial.FechaUltimoLogin.ToString("d/M/yyyy")
+                    credencial.FechaUltimoLogin.HasValue
+                   ? credencial.FechaUltimoLogin.Value.ToString("d/M/yyyy")
+                   : ""
                 });
 
                 for (int i = 0; i < listado.Count; i++)

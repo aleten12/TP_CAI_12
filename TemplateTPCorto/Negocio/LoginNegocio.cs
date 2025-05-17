@@ -47,15 +47,12 @@ namespace Negocio
             }
             else
             {
-                Console.WriteLine("Login fallido para legajo: " + credencial.Legajo);
                 RegistrarIntentoFallido(credencial.Legajo);
 
                 int intentos = ContarIntentosFallidos(credencial.Legajo);
-                Console.WriteLine($"Intentos fallidos actuales: {intentos}");
-
+              
                 if (intentos >= MAX_INTENTOS)
                 {
-                    Console.WriteLine($"Bloqueando usuario: {credencial.Legajo}");
                     BloquearUsuario(credencial.Legajo);
                     EsBloqueado = true;
                 }

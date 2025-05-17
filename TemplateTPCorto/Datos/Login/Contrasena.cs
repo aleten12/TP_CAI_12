@@ -12,11 +12,11 @@ namespace Datos.Login
     {
         private string _contrasenaActual;
         private string _contrasenaNueva;
-        private DateTime _fechaUltimoLogin;
+        private DateTime? _fechaUltimoLogin;
 
         public string ContrasenaActual { get => _contrasenaActual; set => _contrasenaActual = value; }
         public string ContrasenaNueva {  get => _contrasenaNueva; set =>  _contrasenaNueva = value;}
-        public DateTime FechaUltimaLogin { get =>  _fechaUltimoLogin; set => _fechaUltimoLogin = value;}
+        public DateTime? FechaUltimaLogin { get =>  _fechaUltimoLogin; set => _fechaUltimoLogin = value;}
 
         public Contrasena(Credencial credencial)
         {

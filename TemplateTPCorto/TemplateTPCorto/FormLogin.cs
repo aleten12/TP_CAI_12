@@ -69,46 +69,29 @@ namespace TemplateTPCorto
                 // Verificar si el cambio de contraseña debe ser forzado
                 if (contrasenaNegocio.DebeForzarCambio(credencial))
                 {
-                    DialogResult respuesta = MessageBox.Show(
-                       "Han pasado más de 30 días desde el último cambio de contraseña. ¿Quieres cambiar tu contraseña ahora?",
-                        "Cambio de contraseña",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question);
-
-                    if (respuesta == DialogResult.Yes)
-                    {
-                        // Abrir el formulario de cambio de contraseña
-                        FormContrasena formContrasena = new FormContrasena();
-                        formContrasena.UsuarioAutenticado = credencial;
-                        formContrasena.Show();
-                    }
-                    else
-                    {
-                        // Si no es necesario el cambio de contraseña, continuar con el flujo normal
-                        MessageBox.Show("Ingreso exitoso.");
-                    }
-                }
-            }
-
-
-            //VER BIEN LA CONDICION PARA QUE INGRESE OK
-            //PARTE DE ROLES Y PERFILES
-            if (credencial != null)
-            {
-                SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
-                string rolUsuario = seguridadPersistencia.ObtenerPerfil(credencial.Legajo);
-                if (rolUsuario == "Supervisor")
-                {
-                    MessageBox.Show("Bienvenido, Supervisor.");
-                    FormSupervisor formSupervisor = new FormSupervisor();
-                    formSupervisor.Show();
-                    this.Hide();
-                    return;
+                    MessageBox.Show("Han pasado más de 30 días desde el último cambio de contraseña. Se debe realizar el cambio de contraseña");
+                    FormContrasena formContrasena = new FormContrasena();
+                    formContrasena.UsuarioAutenticado = credencial;
+                    formContrasena.Show();
                 }
                 else
                 {
-                    //VER OTROS PERFILES QUE FALTAN AGREGAR
-                    MessageBox.Show("Ingreso exitoso.");
+                    // Si no es necesario el cambio de contraseña, continuar con el Perfil
+                    SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
+                    string rolUsuario = seguridadPersistencia.ObtenerPerfil(credencial.Legajo);
+                    if (rolUsuario == "Supervisor")
+                    {
+                        MessageBox.Show("Bienvenido, Supervisor.");
+                        FormSupervisor formSupervisor = new FormSupervisor();
+                        formSupervisor.Show();
+                        this.Hide();
+                        return;
+                    }
+                    else
+                    {
+                        //VER OTROS PERFILES QUE FALTAN AGREGAR
+                        MessageBox.Show("Ingreso exitoso.");
+                    }
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Datos;
 
 namespace TemplateTPCorto
 {
@@ -18,6 +19,14 @@ namespace TemplateTPCorto
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            FormModificarPersona formModificarPersona = new FormModificarPersona();
+            formModificarPersona.Show();
+            this.Hide();
+        }
+
+     
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

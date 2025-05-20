@@ -38,7 +38,8 @@ namespace TemplateTPCorto
             if (resultadoCambiarContrasena)
             {
                 MessageBox.Show("Se ha cambiado la contraseña correctamente.");
-                //Ver de cambiar a que Form corresponde mostrar
+                FormLogin formLogin = new FormLogin();
+                formLogin.Show();
                 this.Hide();
             }
             else

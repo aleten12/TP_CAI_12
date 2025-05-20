@@ -57,10 +57,38 @@ namespace TemplateTPCorto
 
                 if (campos.Length >= 6)
                 {
-                    // Formatear para mostrar en el ListBox (podés ajustar los campos a mostrar)
-                    string mostrar = $"Legajo: {campos[1]}, Usuario: {campos[2]}, Perfil: {campos[4]}, Fecha Alta: {campos[5]}";
-                    lstCambioCredenciales.Items.Add(mostrar);
+                    string perfil = campos[4];
+
+                    // Validar si perfil es una fecha (error en CSV)
+                    DateTime tempDate;
+                    if (DateTime.TryParse(perfil, out tempDate))
+                    {
+                        perfil = "Perfil inválido";
+                    }
+
+                    string mostrar = $"Legajo: {campos[1]}, Usuario: {campos[2]}, Contraseña: {campos[3]}, Perfil: {campos[4]}, Fecha Alta: {campos[5]}";
+
+
+                    lstCambioCredenciales.Items.Add(new ListItem(linea, mostrar));
                 }
+            }
+        }
+
+        // Clase auxiliar para guardar línea real + texto visible
+        private class ListItem
+        {
+            public string LineaOriginal { get; }
+            private string TextoMostrar { get; }
+
+            public ListItem(string lineaOriginal, string textoMostrar)
+            {
+                LineaOriginal = lineaOriginal;
+                TextoMostrar = textoMostrar;
+            }
+
+            public override string ToString()
+            {
+                return TextoMostrar;
             }
         }
 
@@ -121,8 +149,10 @@ namespace TemplateTPCorto
                 // Eliminar la línea aprobada del archivo de operaciones
                 EliminarLineaOperacion("operacion_cambio_persona.csv", lineaSeleccionada);
 
+                // Quitar el ítem de la lista sin recargar todo
+                lstModificarPersonas.Items.Remove(lstModificarPersonas.SelectedItem);
+
                 MessageBox.Show("Modificación aprobada y aplicada con éxito.");
-                CargarCambioPersonas();
             }
             else
             {
@@ -158,7 +188,8 @@ namespace TemplateTPCorto
                 return;
             }
 
-            string lineaSeleccionada = lstCambioCredenciales.SelectedItem.ToString();
+            ListItem itemSeleccionado = (ListItem)lstCambioCredenciales.SelectedItem;
+            string lineaSeleccionada = itemSeleccionado.LineaOriginal;
             string[] campos = lineaSeleccionada.Split(';');
 
             if (campos.Length < 6)
@@ -168,10 +199,7 @@ namespace TemplateTPCorto
             }
 
             string legajo = campos[1];
-            string nombreUsuario = campos[2];
             string nuevaContrasena = campos[3];
-            string idPerfil = campos[4];
-            string fechaAlta = campos[5];
 
             ModificarCredencial modificador = new ModificarCredencial();
             bool resultado = modificador.CambiarContrasena(legajo, nuevaContrasena);
@@ -180,15 +208,22 @@ namespace TemplateTPCorto
             {
                 EliminarLineaOperacion("operacion_cambio_credencial.csv", lineaSeleccionada);
 
+                // Quitar el ítem aprobado del ListBox
+                lstCambioCredenciales.Items.Remove(itemSeleccionado);
+
                 MessageBox.Show("Credencial modificada y aprobada con éxito.");
-                CargarCambioCredenciales();
+                // O bien recargar todo:
+                // CargarCambioCredenciales();
             }
             else
             {
                 MessageBox.Show("No se pudo aplicar la modificación.");
             }
-
         }
+
+
+
+
 
         private void btnRechazarcred_Click(object sender, EventArgs e)
         {
@@ -198,7 +233,8 @@ namespace TemplateTPCorto
                 return;
             }
 
-            string lineaSeleccionada = lstCambioCredenciales.SelectedItem.ToString();
+            string lineaSeleccionada = ((ListItem)lstCambioCredenciales.SelectedItem).LineaOriginal;
+
 
             EliminarLineaOperacion("operacion_cambio_credencial.csv", lineaSeleccionada);
 
@@ -217,21 +253,39 @@ namespace TemplateTPCorto
             DataBaseUtils dbUtils = new DataBaseUtils();
             List<string> lineas = dbUtils.BuscarDatosPersistencia(nombreArchivo);
 
-            // Reescribimos sin la línea que queremos eliminar
-            var nuevasLineas = lineas.Where(l => l != lineaAEliminar).ToList();
+            string idOperacionEliminar = lineaAEliminar.Split(';')[0].Trim();
+
+            Console.WriteLine($"Buscando eliminar idOperacion: {idOperacionEliminar}");
+            Console.WriteLine($"Archivo a modificar: {nombreArchivo}");
+            Console.WriteLine($"Líneas totales: {lineas.Count}");
+
+            foreach (var l in lineas)
+            {
+                var idOp = l.Split(';')[0].Trim();
+                Console.WriteLine($"idOperacion archivo: {idOp}");
+            }
+
+            var nuevasLineas = lineas.Where(l =>
+            {
+                if (string.IsNullOrWhiteSpace(l)) return false;
+                string idOperacionActual = l.Split(';')[0].Trim();
+                return idOperacionActual != idOperacionEliminar;
+            }).ToList();
+
+            Console.WriteLine($"Líneas después de filtro: {nuevasLineas.Count}");
 
             try
             {
-                string rutaProyecto = @"C:\Users\Usuario\Documents\TP_CAI_12\TemplateTPCorto";
-                string rutaCompleta = Path.Combine(rutaProyecto, "Persistencia", "DataBase", "Tablas", nombreArchivo);
-
-                File.WriteAllLines(rutaCompleta, nuevasLineas);
+                dbUtils.SobrescribirArchivo(nombreArchivo, nuevasLineas);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar la línea: " + ex.Message);
             }
         }
+
+
+
 
     }
 }

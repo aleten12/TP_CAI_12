@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -83,9 +84,14 @@ namespace Negocio
                     break;
                 }
             }
-
             if (actualizado)
             {
+                // Construir ruta relativa al ejecutable
+                string rutaBase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas");
+                string rutaCompleta = Path.GetFullPath(Path.Combine(rutaBase, "persona.csv"));
+
+                File.WriteAllLines(rutaCompleta, registros);
+
                 RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
             }
 

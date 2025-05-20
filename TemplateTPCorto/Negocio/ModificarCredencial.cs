@@ -40,6 +40,11 @@ namespace Negocio
                 }
             }
 
+            if (modificado)
+            {
+                db.SobrescribirArchivo("credenciales.csv", registros);
+            }
+
             string idPerfil = "";
             List<string> usuarioPerfil = db.BuscarRegistro("usuario_perfil.csv");
             foreach (string linea in usuarioPerfil.Skip(1))

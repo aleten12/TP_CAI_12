@@ -86,7 +86,6 @@ namespace Negocio
 
             if (actualizado)
             {
-                db.SobrescribirArchivo("persona.csv", registros);
                 RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
             }
 

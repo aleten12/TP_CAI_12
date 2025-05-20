@@ -48,7 +48,7 @@ namespace TemplateTPCorto
                 MessageBox.Show("Usuario o contraseña inválido");
             }
 
-            
+
             // Verificar si es primer login
             if (loginNegocio.EsPrimerLogin)
             {
@@ -63,7 +63,7 @@ namespace TemplateTPCorto
 
 
             ContrasenaNegocio contrasenaNegocio = new ContrasenaNegocio();
-            
+
             if (credencial != null)
             {
                 // Verificar si el cambio de contraseña debe ser forzado
@@ -78,22 +78,58 @@ namespace TemplateTPCorto
                 {
                     // Si no es necesario el cambio de contraseña, continuar con el Perfil
                     SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
-                    string rolUsuario = seguridadPersistencia.ObtenerPerfil(credencial.Legajo);
-                    if (rolUsuario == "Supervisor")
+                    List<Rol> rolesDelUsuario = seguridadPersistencia.ObtenerRolesPorPerfil(credencial.Legajo);
+
+                    if (rolesDelUsuario.Count == 1)
                     {
-                        MessageBox.Show("Bienvenido, Supervisor.");
-                        FormSupervisor formSupervisor = new FormSupervisor();
-                        formSupervisor.Show();
+                        string descripcionRol = rolesDelUsuario[0]._descripcion;
+
+                        if (descripcionRol == "Supervisor")
+                        {
+                            FormSupervisor formSupervisor = new FormSupervisor();
+                            formSupervisor.Show();
+                        }
+                        else if (descripcionRol == "Operador")
+                        {
+                            FormOperador formOperador = new FormOperador();
+                            formOperador.Show();
+                        }
+
                         this.Hide();
-                        return;
+                    }
+                    else if (rolesDelUsuario.Count > 1)
+                    {
+                        FormSeleccionRol formSeleccionRol = new FormSeleccionRol(rolesDelUsuario);
+
+                        if (formSeleccionRol.ShowDialog() == DialogResult.OK)
+                        {
+                            Rol rolElegido = formSeleccionRol.RolSeleccionado;
+
+                            if (rolElegido._descripcion == "Supervisor")
+                            {
+                                FormSupervisor formSupervisor = new FormSupervisor();
+                                formSupervisor.Show();
+                            }
+                            else if (rolElegido._descripcion == "Operador")
+                            {
+                                FormOperador formOperador = new FormOperador();
+                                formOperador.Show();
+                            }
+
+                            this.Hide();
+                        }
                     }
                     else
                     {
-                        //VER OTROS PERFILES QUE FALTAN AGREGAR
-                        MessageBox.Show("Ingreso exitoso.");
+                        MessageBox.Show("No se encontraron roles asociados al usuario.");
                     }
                 }
             }
         }
     }
 }
+
+                
+    
+
+

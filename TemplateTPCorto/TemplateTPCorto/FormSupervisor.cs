@@ -28,7 +28,9 @@ namespace TemplateTPCorto
      
         private void button2_Click(object sender, EventArgs e)
         {
-
+            FormDesbloquearCredencial formDesbloquearCredencial = new FormDesbloquearCredencial();
+            formDesbloquearCredencial.Show();
+            this.Hide();
         }
     }
 }

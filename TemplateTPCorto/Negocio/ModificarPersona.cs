@@ -86,7 +86,6 @@ namespace Negocio
 
             if (actualizado)
             {
-                db.SobrescribirArchivo("persona.csv", registros);
                 RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
             }
 
@@ -95,22 +94,21 @@ namespace Negocio
 
         public void RegistrarLinea(string legajo, string nombre, string apellido, string dni, string fechaIngreso)
         {
-           string idOperacion = Guid.NewGuid().ToString(); //identificador único
+            string idOperacion = Guid.NewGuid().ToString(); //identificador único
 
-           string nuevaLinea = string.Join(";", new string[]
-           {
+            string nuevaLinea = string.Join(";", new string[]
+            {
            idOperacion,
            legajo,
            nombre,
            apellido,
            dni,
            fechaIngreso
-           });
+            });
 
-           DataBaseUtils db = new DataBaseUtils();
-           db.AgregarRegistro("operacion_cambio_persona.csv", nuevaLinea);
+            DataBaseUtils db = new DataBaseUtils();
+            db.AgregarRegistro("operacion_cambio_persona.csv", nuevaLinea);
         }
     }
 
 }
-

@@ -43,6 +43,7 @@ namespace Persistencia.DataBase
         {
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
             rutaArchivo = Path.GetFullPath(rutaArchivo);
+
             List<String> listado = new List<String>();
 
             try

@@ -16,7 +16,7 @@ namespace TemplateTPCorto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAdministrador("2945"));
+            Application.Run(new FormLogin());
         }
     }
 }

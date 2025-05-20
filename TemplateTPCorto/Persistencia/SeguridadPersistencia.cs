@@ -128,7 +128,7 @@ namespace Persistencia
             return _perfilesRoles;
         }
 
-<<<<<<< Updated upstream
+
         public List<Rol> ObtenerRolesPorPerfil(string legajo)
         {
             List<Rol> rolesDelUsuario = new List<Rol>();
@@ -171,7 +171,6 @@ namespace Persistencia
 
             return rolesDelUsuario;
         }
-=======
->>>>>>> Stashed changes
+
     }
 }

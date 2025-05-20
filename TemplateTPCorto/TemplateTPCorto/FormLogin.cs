@@ -94,6 +94,11 @@ namespace TemplateTPCorto
                             FormOperador formOperador = new FormOperador();
                             formOperador.Show();
                         }
+                        else if (descripcionRol == "Administrador")
+                        {
+                            FormAdministrador formAdministrador = new FormAdministrador();
+                            formAdministrador.Show();
+                        }
 
                         this.Hide();
                     }
@@ -115,11 +120,16 @@ namespace TemplateTPCorto
                                 FormOperador formOperador = new FormOperador();
                                 formOperador.Show();
                             }
+                            else if (rolElegido._descripcion == "Administrador")
+                            {
+                                FormAdministrador formAdministrador = new FormAdministrador();
+                                formAdministrador.Show();
+                            }
 
                             this.Hide();
                         }
-                    }
-                    else
+            }
+            else
                     {
                         MessageBox.Show("No se encontraron roles asociados al usuario.");
                     }

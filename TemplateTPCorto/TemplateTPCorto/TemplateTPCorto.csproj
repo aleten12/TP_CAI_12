@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseUtils.cs" />
+    <Compile Include="FormAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdministrador.Designer.cs">
+      <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormContrasena.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAdministrador.resx">
+      <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormContrasena.resx">
       <DependentUpon>FormContrasena.cs</DependentUpon>
     </EmbeddedResource>

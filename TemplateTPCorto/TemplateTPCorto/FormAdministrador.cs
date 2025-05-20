@@ -37,7 +37,6 @@ namespace TemplateTPCorto
             CargarCambioCredenciales();
             CargarCambioPersonas();
         }
-
         private void CargarCambioCredenciales()
         {
             DataBaseUtils dbUtils = new DataBaseUtils();
@@ -45,11 +44,28 @@ namespace TemplateTPCorto
 
             lstCambioCredenciales.Items.Clear();
 
+            bool primeraLinea = true;
             foreach (var linea in lineas)
             {
-                lstCambioCredenciales.Items.Add(linea);
+                if (primeraLinea)
+                {
+                    primeraLinea = false;  // Saltar la cabecera
+                    continue;
+                }
+
+                string[] campos = linea.Split(';');
+
+                if (campos.Length >= 6)
+                {
+                    // Formatear para mostrar en el ListBox (podés ajustar los campos a mostrar)
+                    string mostrar = $"Legajo: {campos[1]}, Usuario: {campos[2]}, Perfil: {campos[4]}, Fecha Alta: {campos[5]}";
+                    lstCambioCredenciales.Items.Add(mostrar);
+                }
             }
         }
+
+
+
         private void CargarCambioPersonas()
         {
             DataBaseUtils dbUtils = new DataBaseUtils();
@@ -57,11 +73,13 @@ namespace TemplateTPCorto
 
             lstModificarPersonas.Items.Clear();
 
-            foreach (var linea in lineas)
+            // Saltear la primera línea (índice 0) que es el encabezado
+            for (int i = 1; i < lineas.Count; i++)
             {
-                lstModificarPersonas.Items.Add(linea);
+                lstModificarPersonas.Items.Add(lineas[i]);
             }
         }
+
         private void lstModificarPersonas_SelectedIndexChanged(object sender, EventArgs e)
         {
 

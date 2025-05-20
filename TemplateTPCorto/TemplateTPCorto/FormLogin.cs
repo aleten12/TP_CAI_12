@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using Datos.Seguridad;
 using Persistencia;
 
+using Persistencia;
+
 namespace TemplateTPCorto
 {
     public partial class FormLogin : Form
@@ -44,8 +46,8 @@ namespace TemplateTPCorto
 
             if (credencial == null)
             {
-
                 MessageBox.Show("Usuario o contraseña inválido");
+                return;
             }
 
 
@@ -89,11 +91,11 @@ namespace TemplateTPCorto
                             FormSupervisor formSupervisor = new FormSupervisor();
                             formSupervisor.Show();
                         }
-                        else if (descripcionRol == "Operador")
+                        /*else if (descripcionRol == "Operador")
                         {
                             FormOperador formOperador = new FormOperador();
                             formOperador.Show();
-                        }
+                        }*/
                         else if (descripcionRol == "Administrador")
                         {
                             FormAdministrador formAdministrador = new FormAdministrador();
@@ -115,11 +117,11 @@ namespace TemplateTPCorto
                                 FormSupervisor formSupervisor = new FormSupervisor();
                                 formSupervisor.Show();
                             }
-                            else if (rolElegido._descripcion == "Operador")
+                            /*else if (rolElegido._descripcion == "Operador")
                             {
                                 FormOperador formOperador = new FormOperador();
                                 formOperador.Show();
-                            }
+                            }*/
                             else if (rolElegido._descripcion == "Administrador")
                             {
                                 FormAdministrador formAdministrador = new FormAdministrador();
@@ -128,8 +130,8 @@ namespace TemplateTPCorto
 
                             this.Hide();
                         }
-            }
-            else
+                    }
+                    else
                     {
                         MessageBox.Show("No se encontraron roles asociados al usuario.");
                     }
@@ -139,7 +141,7 @@ namespace TemplateTPCorto
     }
 }
 
-                
-    
+
+
 
 

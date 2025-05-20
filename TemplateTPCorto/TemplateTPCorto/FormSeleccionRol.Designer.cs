@@ -35,27 +35,31 @@
             // comboBoxRoles
             // 
             this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Location = new System.Drawing.Point(82, 82);
+            this.comboBoxRoles.Location = new System.Drawing.Point(123, 126);
+            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxRoles.Name = "comboBoxRoles";
-            this.comboBoxRoles.Size = new System.Drawing.Size(129, 21);
+            this.comboBoxRoles.Size = new System.Drawing.Size(192, 28);
             this.comboBoxRoles.TabIndex = 0;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(82, 186);
+            this.btnAceptar.Location = new System.Drawing.Point(123, 286);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(129, 28);
+            this.btnAceptar.Size = new System.Drawing.Size(194, 43);
             this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // FormSeleccionRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 253);
+            this.ClientSize = new System.Drawing.Size(549, 389);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.comboBoxRoles);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormSeleccionRol";
             this.Text = "FormSeleccionRol";
             this.ResumeLayout(false);

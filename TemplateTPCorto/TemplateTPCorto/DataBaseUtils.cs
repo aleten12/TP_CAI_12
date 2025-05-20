@@ -14,7 +14,7 @@ namespace Persistencia.DataBase
         private readonly string rutaBase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataBase", "Tablas");
 
 
-        public List<String> BuscarRegistro(String nombreArchivo)
+        public List<String> BuscarRegistro(String nombreArchivo) 
         {
             string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", nombreArchivo);
             rutaArchivo = Path.GetFullPath(rutaArchivo);

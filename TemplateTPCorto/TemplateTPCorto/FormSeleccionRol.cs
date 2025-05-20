@@ -45,10 +45,6 @@ namespace TemplateTPCorto
 
             if (RolSeleccionado != null)
             {
-                // Independientemente del rol seleccionado, abrimos FormAdministrador
-                FormAdministrador formAdministrador = new FormAdministrador();
-                formAdministrador.Show();
-
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

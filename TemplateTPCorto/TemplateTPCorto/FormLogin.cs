@@ -12,8 +12,6 @@ using System.Windows.Forms;
 using Datos.Seguridad;
 using Persistencia;
 
-using Persistencia;
-
 namespace TemplateTPCorto
 {
     public partial class FormLogin : Form

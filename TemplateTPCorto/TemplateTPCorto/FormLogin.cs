@@ -105,6 +105,11 @@ namespace TemplateTPCorto
                 FormOperador formOperador = new FormOperador();
                 formOperador.Show();
             }*/
+            else if (descripcionPerfil == "Administrador")  // <- Agregado
+            {
+                FormAdministrador formAdministrador = new FormAdministrador();
+                formAdministrador.Show();
+            }
             else
             {
                 MessageBox.Show("Perfil desconocido: " + descripcionPerfil);

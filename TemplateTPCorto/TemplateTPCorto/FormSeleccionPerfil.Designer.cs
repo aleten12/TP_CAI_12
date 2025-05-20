@@ -1,6 +1,6 @@
 ﻿namespace TemplateTPCorto
 {
-    partial class FormSeleccionRol
+    partial class FormSeleccionPerfil
     {
         /// <summary>
         /// Required designer variable.
@@ -28,47 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxRoles = new System.Windows.Forms.ComboBox();
+            this.comboBoxPerfiles = new System.Windows.Forms.ComboBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBoxRoles
+            // comboBoxPerfiles
             // 
-            this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Location = new System.Drawing.Point(123, 126);
-            this.comboBoxRoles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBoxRoles.Name = "comboBoxRoles";
-            this.comboBoxRoles.Size = new System.Drawing.Size(192, 28);
-            this.comboBoxRoles.TabIndex = 0;
+            this.comboBoxPerfiles.FormattingEnabled = true;
+            this.comboBoxPerfiles.Location = new System.Drawing.Point(115, 79);
+            this.comboBoxPerfiles.Name = "comboBoxPerfiles";
+            this.comboBoxPerfiles.Size = new System.Drawing.Size(151, 21);
+            this.comboBoxPerfiles.TabIndex = 0;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(123, 286);
-            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAceptar.Location = new System.Drawing.Point(120, 173);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(194, 43);
+            this.btnAceptar.Size = new System.Drawing.Size(145, 26);
             this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // FormSeleccionRol
+            // FormSeleccionPerfil
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 389);
+            this.ClientSize = new System.Drawing.Size(364, 301);
             this.Controls.Add(this.btnAceptar);
-            this.Controls.Add(this.comboBoxRoles);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "FormSeleccionRol";
-            this.Text = "FormSeleccionRol";
+            this.Controls.Add(this.comboBoxPerfiles);
+            this.Name = "FormSeleccionPerfil";
+            this.Text = "FormSeleccionPerfil";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxRoles;
+        private System.Windows.Forms.ComboBox comboBoxPerfiles;
         private System.Windows.Forms.Button btnAceptar;
     }
 }

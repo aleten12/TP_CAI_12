@@ -128,48 +128,28 @@ namespace Persistencia
             return _perfilesRoles;
         }
 
-
-        public List<Rol> ObtenerRolesPorPerfil(string legajo)
+        public List<Perfil> ObtenerPerfilesPorUsuario(string legajo)
         {
-            List<Rol> rolesDelUsuario = new List<Rol>();
-            string idPerfil = null;
+            List<Perfil> perfilesDelUsuario = new List<Perfil>();
 
             foreach (var usuarioPerfil in _usuariosPerfil)
             {
                 if (usuarioPerfil._legajo == legajo)
                 {
-                    idPerfil = usuarioPerfil._idPerfil;
-                    break;
-                }
-            }
+                    string idPerfil = usuarioPerfil._idPerfil;
 
-            if (idPerfil == null)
-            {
-                return rolesDelUsuario;
-            }
-
-            List<string> idsRolesAsociados = new List<string>();
-            foreach (var perfilRol in _perfilesRoles)
-            {
-                if (perfilRol._idPerfil == idPerfil)
-                {
-                    idsRolesAsociados.Add(perfilRol._idRol);
-                }
-            }
-
-            foreach (var idRol in idsRolesAsociados)
-            {
-                foreach (var rol in _roles)
-                {
-                    if (rol._id == idRol)
+                    foreach (var perfil in _perfiles)
                     {
-                        rolesDelUsuario.Add(rol);
-                        break;
+                        if (perfil._id == idPerfil)
+                        {
+                            perfilesDelUsuario.Add(perfil);
+                            break;
+                        }
                     }
                 }
             }
 
-            return rolesDelUsuario;
+            return perfilesDelUsuario;
         }
 
     }

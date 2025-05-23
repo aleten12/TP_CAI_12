@@ -151,6 +151,5 @@ namespace Persistencia
 
             return perfilesDelUsuario;
         }
-
     }
 }

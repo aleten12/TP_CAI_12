@@ -75,17 +75,11 @@ namespace TemplateTPCorto
             SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
             List<Perfil> perfilesDelUsuario = seguridadPersistencia.ObtenerPerfilesPorUsuario(credencial.Legajo);
 
-            if (perfilesDelUsuario.Count == 1)
+            //Verifico si encuentro Perfil
+            if (perfilesDelUsuario != null)
             {
                 AbrirFormularioPorPerfil(perfilesDelUsuario[0]._descripcion);
-            }
-            else if (perfilesDelUsuario.Count > 1)
-            {
-                FormSeleccionPerfil formSeleccionPerfil = new FormSeleccionPerfil(perfilesDelUsuario);
-                if (formSeleccionPerfil.ShowDialog() == DialogResult.OK)
-                {
-                    AbrirFormularioPorPerfil(formSeleccionPerfil.PerfilSeleccionado._descripcion);
-                }
+           
             }
             else
             {
@@ -100,26 +94,24 @@ namespace TemplateTPCorto
                 FormSupervisor formSupervisor = new FormSupervisor();
                 formSupervisor.Show();
             }
-            /*else if (descripcionPerfil == "Operador")
-            {
-                FormOperador formOperador = new FormOperador();
-                formOperador.Show();
-            }*/
-            else if (descripcionPerfil == "Administrador")  // <- Agregado
+            else if (descripcionPerfil == "Administrador") 
             {
                 FormAdministrador formAdministrador = new FormAdministrador();
                 formAdministrador.Show();
+            }
+            else if (descripcionPerfil == "Operador")
+            {
+                FormOperador formOperador = new FormOperador();
+                formOperador.Show();
             }
             else
             {
                 MessageBox.Show("Perfil desconocido: " + descripcionPerfil);
                 return;
             }
-
             this.Hide();
         }
     }
-
 }
 
 

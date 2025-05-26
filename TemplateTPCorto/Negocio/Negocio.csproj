@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministradorNegocio.cs" />
     <Compile Include="ContrasenaNegocio.cs" />
+    <Compile Include="Fase2.Negocio\ProductoNegocio.cs" />
+    <Compile Include="Fase2.Negocio\VentasNegocio.cs" />
     <Compile Include="LoginNegocio.cs" />
     <Compile Include="ModificarCredencial.cs" />
     <Compile Include="ModificarPersona.cs" />

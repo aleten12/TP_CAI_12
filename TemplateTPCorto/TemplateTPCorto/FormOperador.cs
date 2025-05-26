@@ -21,5 +21,12 @@ namespace TemplateTPCorto
         {
 
         }
+
+        private void btnCargarVentas_Click(object sender, EventArgs e)
+        {
+            FormVentas formVentas = new FormVentas();
+            formVentas.Show();
+            this.Hide();
+        }
     }
 }

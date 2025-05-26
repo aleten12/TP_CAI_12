@@ -94,6 +94,12 @@
     <Compile Include="FormSupervisor.Designer.cs">
       <DependentUpon>FormSupervisor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormVentas.Designer.cs">
+      <DependentUpon>FormVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAdministrador.resx">
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSupervisor.resx">
       <DependentUpon>FormSupervisor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVentas.resx">
+      <DependentUpon>FormVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

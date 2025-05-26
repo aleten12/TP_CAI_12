@@ -46,6 +46,9 @@
     <Compile Include="Login\IntentoLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\Seguridad.cs" />
+    <Compile Include="Ventas\CategoriaProductos.cs" />
+    <Compile Include="Ventas\Cliente.cs" />
+    <Compile Include="Ventas\Producto.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

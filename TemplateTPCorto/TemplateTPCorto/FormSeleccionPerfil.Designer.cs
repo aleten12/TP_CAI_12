@@ -35,16 +35,18 @@
             // comboBoxPerfiles
             // 
             this.comboBoxPerfiles.FormattingEnabled = true;
-            this.comboBoxPerfiles.Location = new System.Drawing.Point(115, 79);
+            this.comboBoxPerfiles.Location = new System.Drawing.Point(154, 136);
+            this.comboBoxPerfiles.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBoxPerfiles.Name = "comboBoxPerfiles";
-            this.comboBoxPerfiles.Size = new System.Drawing.Size(151, 21);
+            this.comboBoxPerfiles.Size = new System.Drawing.Size(224, 28);
             this.comboBoxPerfiles.TabIndex = 0;
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(120, 173);
+            this.btnAceptar.Location = new System.Drawing.Point(152, 209);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(145, 26);
+            this.btnAceptar.Size = new System.Drawing.Size(226, 40);
             this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -52,13 +54,16 @@
             // 
             // FormSeleccionPerfil
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 301);
+            this.ClientSize = new System.Drawing.Size(559, 393);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.comboBoxPerfiles);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormSeleccionPerfil";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSeleccionPerfil";
+          //  this.Load += new System.EventHandler(this.FormSeleccionPerfil_Load);
             this.ResumeLayout(false);
 
         }

@@ -32,5 +32,10 @@ namespace TemplateTPCorto
             formDesbloquearCredencial.Show();
             this.Hide();
         }
+
+        private void FormSupervisor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

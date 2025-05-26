@@ -127,38 +127,23 @@ namespace TemplateTPCorto
             }
 
             string lineaSeleccionada = lstModificarPersonas.SelectedItem.ToString();
-            string[] campos = lineaSeleccionada.Split(';');
 
-            if (campos.Length < 6)
+            ModificarPersona mp = new ModificarPersona();
+            bool fueAplicada = mp.AplicarCambios(lineaSeleccionada);
+
+            if (fueAplicada)
             {
-                MessageBox.Show("La línea seleccionada no es válida.");
-                return;
-            }
-
-            string legajo = campos[1];
-            string nombre = campos[2];
-            string apellido = campos[3];
-            string dni = campos[4];
-            string fechaIngreso = campos[5];
-
-            ModificarPersona modificador = new ModificarPersona();
-            bool resultado = modificador.GuardarDatosModificados(legajo, nombre, apellido, dni, fechaIngreso);
-
-            if (resultado)
-            {
-                // Eliminar la línea aprobada del archivo de operaciones
+                // Eliminamos la línea aprobada 
                 EliminarLineaOperacion("operacion_cambio_persona.csv", lineaSeleccionada);
 
-                // Quitar el ítem de la lista sin recargar todo
                 lstModificarPersonas.Items.Remove(lstModificarPersonas.SelectedItem);
 
                 MessageBox.Show("Modificación aprobada y aplicada con éxito.");
             }
             else
             {
-                MessageBox.Show("No se aplicaron cambios.");
+                MessageBox.Show("No se pudo aplicar la modificación. Verificá los datos.");
             }
-
         }
 
         private void btnRechazarModificacionPersona_Click(object sender, EventArgs e)
@@ -222,9 +207,6 @@ namespace TemplateTPCorto
         }
 
 
-
-
-
         private void btnRechazarcred_Click(object sender, EventArgs e)
         {
             if (lstCambioCredenciales.SelectedItem == null)
@@ -243,10 +225,6 @@ namespace TemplateTPCorto
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void EliminarLineaOperacion(string nombreArchivo, string lineaAEliminar)
         {
@@ -283,9 +261,6 @@ namespace TemplateTPCorto
                 MessageBox.Show("Error al eliminar la línea: " + ex.Message);
             }
         }
-
-
-
 
     }
 }

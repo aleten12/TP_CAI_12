@@ -33,16 +33,8 @@ namespace TemplateTPCorto
             }
 
             ModificarPersona mp = new ModificarPersona();
-            bool resultado = mp.GuardarDatosModificados(legajo, nombre, apellido, dni, fechaIngreso);
-
-            if (resultado)
-            {
-                MessageBox.Show("Los datos se actualizaron correctamente.");
-            }
-            else
-            {
-                MessageBox.Show("No hubo cambios o los datos son inválidos.");
-            }
+            mp.RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
+            MessageBox.Show("La modificación fue registrada para su aprobación.");
         }
 
         private void FormModificarPersona_Load(object sender, EventArgs e)

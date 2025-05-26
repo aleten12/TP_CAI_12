@@ -58,6 +58,8 @@ namespace TemplateTPCorto
                 MessageBox.Show("Perfil seleccionado no válido.");
             }
         }
+
+     
     }
 
 }

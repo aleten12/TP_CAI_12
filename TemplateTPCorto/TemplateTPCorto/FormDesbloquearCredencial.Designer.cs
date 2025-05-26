@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 457);
+            this.ClientSize = new System.Drawing.Size(736, 434);
             this.Controls.Add(this.btbModificarContrasena);
             this.Controls.Add(this.lblLegajo);
             this.Controls.Add(this.cbxLegajos);

@@ -31,9 +31,18 @@ namespace Negocio
             return listaLegajos;
         }
 
-        public bool GuardarDatosModificados(string legajo, string nombre, string apellido, string dni, string fechaIngreso)
+        //USADO POR ADMINISTRADOR
+        public bool AplicarCambios(string lineaSeleccionada)
         {
-            if (string.IsNullOrWhiteSpace(legajo))
+            string[] campos = lineaSeleccionada.Split(';');
+
+            string legajo = campos[1];
+            string nombre = campos[2];
+            string apellido = campos[3];
+            string dni = campos[4];
+            string fechaIngreso = campos[5];
+
+            if (legajo == null)
             {
                 return false;
             }
@@ -44,60 +53,56 @@ namespace Negocio
 
             for (int i = 1; i < registros.Count; i++)
             {
-                string[] campos = registros[i].Split(';');
+                string[] camposr = registros[i].Split(';');
 
-                if (campos[0] == legajo)
+                if (camposr[0] == legajo)
                 {
                     bool realizoCambio = false;
 
-                    if (!string.IsNullOrWhiteSpace(nombre) && campos[1] != nombre)
+                    if (!string.IsNullOrWhiteSpace(nombre) && camposr[1] != nombre)
                     {
-                        campos[1] = nombre;
+                        camposr[1] = nombre;
                         realizoCambio = true;
                     }
 
-                    if (!string.IsNullOrWhiteSpace(apellido) && campos[2] != apellido)
+                    if (!string.IsNullOrWhiteSpace(apellido) && camposr[2] != apellido)
                     {
-                        campos[2] = apellido;
+                        camposr[2] = apellido;
                         realizoCambio = true;
                     }
 
-                    if (!string.IsNullOrWhiteSpace(dni) && campos[3] != dni)
+                    if (!string.IsNullOrWhiteSpace(dni) && camposr[3] != dni)
                     {
-                        campos[3] = dni;
+                        camposr[3] = dni;
                         realizoCambio = true;
                     }
 
 
-                    if (!string.IsNullOrWhiteSpace(fechaIngreso) && campos[4] != fechaIngreso)
+                    if (!string.IsNullOrWhiteSpace(fechaIngreso) && camposr[4] != fechaIngreso)
                     {
-                        campos[4] = fechaIngreso;
+                        camposr[4] = fechaIngreso;
                         realizoCambio = true;
                     }
 
                     if (realizoCambio)
                     {
-                        registros[i] = string.Join(";", campos);
+                        registros[i] = string.Join(";", camposr);
                         actualizado = true;
                     }
 
                     break;
                 }
             }
+
             if (actualizado)
             {
-                // Construir ruta relativa al ejecutable
-                string rutaBase = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas");
-                string rutaCompleta = Path.GetFullPath(Path.Combine(rutaBase, "persona.csv"));
-
-                File.WriteAllLines(rutaCompleta, registros);
-
-                RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
+                db.SobrescribirArchivo("persona.csv", registros);
             }
 
             return actualizado;
         }
 
+        //USADO POR SUPERVISOR
         public void RegistrarLinea(string legajo, string nombre, string apellido, string dni, string fechaIngreso)
         {
             string idOperacion = Guid.NewGuid().ToString(); //identificador único

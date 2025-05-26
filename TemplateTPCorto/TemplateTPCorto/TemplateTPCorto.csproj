@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseUtils.cs" />
     <Compile Include="FormAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,9 +93,6 @@
     </Compile>
     <Compile Include="FormSupervisor.Designer.cs">
       <DependentUpon>FormSupervisor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="..\Negocio\ModificarCredencial.cs">
-      <Link>ModificarCredencial.cs</Link>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

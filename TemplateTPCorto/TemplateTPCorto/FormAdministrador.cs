@@ -44,33 +44,9 @@ namespace TemplateTPCorto
 
             lstCambioCredenciales.Items.Clear();
 
-            bool primeraLinea = true;
-            foreach (var linea in lineas)
+            for (int i = 1; i < lineas.Count; i++)
             {
-                if (primeraLinea)
-                {
-                    primeraLinea = false;  // Saltar la cabecera
-                    continue;
-                }
-
-                string[] campos = linea.Split(';');
-
-                if (campos.Length >= 6)
-                {
-                    string perfil = campos[4];
-
-                    // Validar si perfil es una fecha (error en CSV)
-                    DateTime tempDate;
-                    if (DateTime.TryParse(perfil, out tempDate))
-                    {
-                        perfil = "Perfil inválido";
-                    }
-
-                    string mostrar = $"Legajo: {campos[1]}, Usuario: {campos[2]}, Contraseña: {campos[3]}, Perfil: {campos[4]}, Fecha Alta: {campos[5]}";
-
-
-                    lstCambioCredenciales.Items.Add(new ListItem(linea, mostrar));
-                }
+                lstCambioCredenciales.Items.Add(lineas[i]);
             }
         }
 
@@ -91,8 +67,6 @@ namespace TemplateTPCorto
                 return TextoMostrar;
             }
         }
-
-
 
         private void CargarCambioPersonas()
         {
@@ -169,43 +143,26 @@ namespace TemplateTPCorto
         {
             if (lstCambioCredenciales.SelectedItem == null)
             {
-                MessageBox.Show("Seleccioná una modificación de credencial para aprobar.");
+                MessageBox.Show("Seleccioná una modificación para aprobar.");
                 return;
             }
 
-            ListItem itemSeleccionado = (ListItem)lstCambioCredenciales.SelectedItem;
-            string lineaSeleccionada = itemSeleccionado.LineaOriginal;
-            string[] campos = lineaSeleccionada.Split(';');
+            string lineaSeleccionada = lstCambioCredenciales.SelectedItem.ToString();
 
-            if (campos.Length < 6)
-            {
-                MessageBox.Show("La línea seleccionada no es válida.");
-                return;
-            }
+            ModificarCredencial modCred = new ModificarCredencial();
+            bool aplicado = modCred.AplicarCambioContrasena(lineaSeleccionada);
 
-            string legajo = campos[1];
-            string nuevaContrasena = campos[3];
-
-            ModificarCredencial modificador = new ModificarCredencial();
-            bool resultado = modificador.CambiarContrasena(legajo, nuevaContrasena);
-
-            if (resultado)
+            if (aplicado)
             {
                 EliminarLineaOperacion("operacion_cambio_credencial.csv", lineaSeleccionada);
-
-                // Quitar el ítem aprobado del ListBox
-                lstCambioCredenciales.Items.Remove(itemSeleccionado);
-
-                MessageBox.Show("Credencial modificada y aprobada con éxito.");
-                // O bien recargar todo:
-                // CargarCambioCredenciales();
+                lstCambioCredenciales.Items.Remove(lstCambioCredenciales.SelectedItem);
+                MessageBox.Show("Cambio aplicado correctamente.");
             }
             else
             {
-                MessageBox.Show("No se pudo aplicar la modificación.");
+                MessageBox.Show("No se pudo aplicar el cambio.");
             }
         }
-
 
         private void btnRechazarcred_Click(object sender, EventArgs e)
         {

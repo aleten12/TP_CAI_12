@@ -42,9 +42,9 @@
             // 
             this.lstModificarPersonas.FormattingEnabled = true;
             this.lstModificarPersonas.ItemHeight = 20;
-            this.lstModificarPersonas.Location = new System.Drawing.Point(31, 55);
+            this.lstModificarPersonas.Location = new System.Drawing.Point(17, 55);
             this.lstModificarPersonas.Name = "lstModificarPersonas";
-            this.lstModificarPersonas.Size = new System.Drawing.Size(662, 324);
+            this.lstModificarPersonas.Size = new System.Drawing.Size(625, 324);
             this.lstModificarPersonas.TabIndex = 0;
             this.lstModificarPersonas.SelectedIndexChanged += new System.EventHandler(this.lstModificarPersonas_SelectedIndexChanged);
             // 
@@ -52,15 +52,15 @@
             // 
             this.lstCambioCredenciales.FormattingEnabled = true;
             this.lstCambioCredenciales.ItemHeight = 20;
-            this.lstCambioCredenciales.Location = new System.Drawing.Point(742, 55);
+            this.lstCambioCredenciales.Location = new System.Drawing.Point(665, 55);
             this.lstCambioCredenciales.Name = "lstCambioCredenciales";
-            this.lstCambioCredenciales.Size = new System.Drawing.Size(669, 324);
+            this.lstCambioCredenciales.Size = new System.Drawing.Size(615, 324);
             this.lstCambioCredenciales.TabIndex = 1;
             this.lstCambioCredenciales.SelectedIndexChanged += new System.EventHandler(this.lstCambioCredenciales_SelectedIndexChanged);
             // 
             // btnAprobarModificacionPersona
             // 
-            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(197, 388);
+            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(161, 388);
             this.btnAprobarModificacionPersona.Name = "btnAprobarModificacionPersona";
             this.btnAprobarModificacionPersona.Size = new System.Drawing.Size(137, 62);
             this.btnAprobarModificacionPersona.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             // btnRechazarModificacionPersona
             // 
-            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(379, 388);
+            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(343, 388);
             this.btnRechazarModificacionPersona.Name = "btnRechazarModificacionPersona";
             this.btnRechazarModificacionPersona.Size = new System.Drawing.Size(142, 62);
             this.btnRechazarModificacionPersona.TabIndex = 3;
@@ -80,9 +80,9 @@
             // 
             // btnActualizarCredencial
             // 
-            this.btnActualizarCredencial.Location = new System.Drawing.Point(947, 388);
+            this.btnActualizarCredencial.Location = new System.Drawing.Point(822, 388);
             this.btnActualizarCredencial.Name = "btnActualizarCredencial";
-            this.btnActualizarCredencial.Size = new System.Drawing.Size(122, 62);
+            this.btnActualizarCredencial.Size = new System.Drawing.Size(139, 62);
             this.btnActualizarCredencial.TabIndex = 4;
             this.btnActualizarCredencial.Text = "Actualizar";
             this.btnActualizarCredencial.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // btnRechazarcred
             // 
-            this.btnRechazarcred.Location = new System.Drawing.Point(1106, 388);
+            this.btnRechazarcred.Location = new System.Drawing.Point(1001, 388);
             this.btnRechazarcred.Name = "btnRechazarcred";
-            this.btnRechazarcred.Size = new System.Drawing.Size(127, 62);
+            this.btnRechazarcred.Size = new System.Drawing.Size(130, 62);
             this.btnRechazarcred.TabIndex = 5;
             this.btnRechazarcred.Text = "Rechazar";
             this.btnRechazarcred.UseVisualStyleBackColor = true;
@@ -101,17 +101,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 25);
+            this.label1.Location = new System.Drawing.Point(13, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 20);
             this.label1.TabIndex = 6;
             this.label1.Text = "Modificar Personas";
-          //  this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(738, 25);
+            this.label2.Location = new System.Drawing.Point(661, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 20);
             this.label2.TabIndex = 7;
@@ -121,7 +120,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1450, 491);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1324, 499);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRechazarcred);

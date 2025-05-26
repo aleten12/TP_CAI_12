@@ -31,14 +31,14 @@ namespace TemplateTPCorto
 
             ModificarCredencial negocio = new ModificarCredencial();
 
-            if (negocio.CambiarContrasena(legajo, nuevaContrasena))
+            if (negocio.RegistrarCambioContrasena(legajo, nuevaContrasena))
             {
-                MessageBox.Show("Contraseña modificada correctamente.");
+                MessageBox.Show("La modificación fue registrada para su aprobación.");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("No se pudo modificar la contraseña.");
+                MessageBox.Show("No se pudo registrar el cambio de contraseña.");
             }
         }
 

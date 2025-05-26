@@ -10,38 +10,39 @@ namespace Negocio
 {
     public class ModificarCredencial
     {
-        public bool CambiarContrasena(string legajo, string nuevaContrasena)
+        //USA SUPERVISOR
+        public bool RegistrarCambioContrasena(string legajo, string nuevaContrasena)
         {
             if (string.IsNullOrWhiteSpace(legajo) || string.IsNullOrWhiteSpace(nuevaContrasena))
             {
                 return false;
             }
 
+            if (nuevaContrasena.Length < 8)
+            {
+                return false;
+            }
+
             DataBaseUtils db = new DataBaseUtils();
             List<string> registros = db.BuscarRegistro("credenciales.csv");
-            bool modificado = false;
             string nombreUsuario = "";
+            string idPerfil = "";
             string fechaAlta = "";
+            string fechaUltimoLogin = "";
 
-            for (int i = 1; i < registros.Count; i++)
+            foreach (string linea in registros.Skip(1))
             {
-                string[] campos = registros[i].Split(';');
+                string[] campos = linea.Split(';');
 
                 if (campos[0] == legajo)
                 {
                     nombreUsuario = campos[1];
-                    campos[2] = nuevaContrasena;
                     fechaAlta = campos[3];
-                    campos[4] = "";
-
-                    registros[i] = string.Join(";", campos);
-                    modificado = true;
+                    fechaUltimoLogin = "";
                     break;
                 }
             }
 
-
-            string idPerfil = "";
             List<string> usuarioPerfil = db.BuscarRegistro("usuario_perfil.csv");
             foreach (string linea in usuarioPerfil.Skip(1))
             {
@@ -53,14 +54,13 @@ namespace Negocio
                 }
             }
 
-            RegistrarLinea(legajo, nombreUsuario, nuevaContrasena, idPerfil, fechaAlta);
+            if (string.IsNullOrEmpty(nombreUsuario))
+            {
+                return false;
+            }
 
-            return modificado;
-        }
-
-        public void RegistrarLinea(string legajo, string nombreUsuario, string nuevaContrasena, string idPerfil, string fechaAlta)
-        {
             string idOperacion = Guid.NewGuid().ToString();
+
             string nuevaOperacion = string.Join(";", new string[]
             {
             idOperacion,
@@ -69,12 +69,53 @@ namespace Negocio
             nuevaContrasena,
             idPerfil,
             fechaAlta,
-            "" // fechaUltimoLogin vacía
+            fechaUltimoLogin
             });
 
-            DataBaseUtils db = new DataBaseUtils();
             db.AgregarRegistro("operacion_cambio_credencial.csv", nuevaOperacion);
+
+            return true;
+
         }
 
+        //USA ADMINISTRADOR
+        public bool AplicarCambioContrasena(string lineaOperacion)
+        {
+            if (string.IsNullOrWhiteSpace(lineaOperacion))
+            {
+                return false;
+            }
+
+            string[] campos = lineaOperacion.Split(';');
+            string legajo = campos[1];
+            string nuevaContrasena = campos[3];
+
+            DataBaseUtils db = new DataBaseUtils();
+            List<string> registros = db.BuscarRegistro("credenciales.csv");
+            bool fueModificado = false;
+
+            for (int i = 1; i < registros.Count; i++) 
+            {
+                string[] camposRegistro = registros[i].Split(';');
+                
+                if (camposRegistro[0] == legajo)
+                {
+                    camposRegistro[2] = nuevaContrasena; // cambiamos la contraseña
+                    camposRegistro[4] = ""; //se pide vacio porque es un primer login
+                    registros[i] = string.Join(";", camposRegistro);
+                    fueModificado = true;
+                    break;
+                }
+            }
+
+            if (fueModificado)
+            {
+                db.SobrescribirArchivo("credenciales.csv", registros);
+            }
+
+            return fueModificado;
+        }
     }
+
 }
+

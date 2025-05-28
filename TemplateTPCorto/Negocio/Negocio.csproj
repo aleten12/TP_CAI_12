@@ -44,6 +44,9 @@
     <Compile Include="ContrasenaNegocio.cs" />
     <Compile Include="Fase2.Negocio\ProductoNegocio.cs" />
     <Compile Include="Fase2.Negocio\VentasNegocio.cs" />
+    <Compile Include="GestorCambioCredenciales.cs" />
+    <Compile Include="GestorCambioPersona.cs" />
+    <Compile Include="GestorOperaciones.cs" />
     <Compile Include="LoginNegocio.cs" />
     <Compile Include="ModificarCredencial.cs" />
     <Compile Include="ModificarPersona.cs" />

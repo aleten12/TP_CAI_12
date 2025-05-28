@@ -17,6 +17,10 @@ namespace TemplateTPCorto
     public partial class FormAdministrador : Form
     {
         private string legajoInicial;
+        private readonly GestorOperaciones gestor = new GestorOperaciones();
+        private readonly GestorCambioPersona gestorCambioPersona = new GestorCambioPersona();
+        private readonly GestorCambioCredenciales gestorCambioCredenciales = new GestorCambioCredenciales();
+
 
         // Constructor vacío
         public FormAdministrador()
@@ -37,16 +41,28 @@ namespace TemplateTPCorto
             CargarCambioCredenciales();
             CargarCambioPersonas();
         }
+
         private void CargarCambioCredenciales()
         {
-            DataBaseUtils dbUtils = new DataBaseUtils();
-            List<string> lineas = dbUtils.BuscarDatosPersistencia("operacion_cambio_credencial.csv");
+            var cambios = gestor.ObtenerCambioCredenciales();
 
             lstCambioCredenciales.Items.Clear();
 
-            for (int i = 1; i < lineas.Count; i++)
+            foreach (var linea in cambios)
             {
-                lstCambioCredenciales.Items.Add(lineas[i]);
+                lstCambioCredenciales.Items.Add(linea);
+            }
+        }
+
+        private void CargarCambioPersonas()
+        {
+            var cambios = gestor.ObtenerCambioPersonas();
+
+            lstModificarPersonas.Items.Clear();
+
+            foreach (var linea in cambios)
+            {
+                lstModificarPersonas.Items.Add(linea);
             }
         }
 
@@ -68,19 +84,6 @@ namespace TemplateTPCorto
             }
         }
 
-        private void CargarCambioPersonas()
-        {
-            DataBaseUtils dbUtils = new DataBaseUtils();
-            List<string> lineas = dbUtils.BuscarDatosPersistencia("operacion_cambio_persona.csv");
-
-            lstModificarPersonas.Items.Clear();
-
-            // Saltear la primera línea (índice 0) que es el encabezado
-            for (int i = 1; i < lineas.Count; i++)
-            {
-                lstModificarPersonas.Items.Add(lineas[i]);
-            }
-        }
 
         private void lstModificarPersonas_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -102,16 +105,12 @@ namespace TemplateTPCorto
 
             string lineaSeleccionada = lstModificarPersonas.SelectedItem.ToString();
 
-            ModificarPersona mp = new ModificarPersona();
-            bool fueAplicada = mp.AplicarCambios(lineaSeleccionada);
+            // Usamos el método del gestor en la capa negocio
+            bool fueAplicada = gestorCambioPersona.AplicarCambioPersona(lineaSeleccionada);
 
             if (fueAplicada)
             {
-                // Eliminamos la línea aprobada 
-                EliminarLineaOperacion("operacion_cambio_persona.csv", lineaSeleccionada);
-
                 lstModificarPersonas.Items.Remove(lstModificarPersonas.SelectedItem);
-
                 MessageBox.Show("Modificación aprobada y aplicada con éxito.");
             }
             else
@@ -130,14 +129,14 @@ namespace TemplateTPCorto
 
             string lineaSeleccionada = lstModificarPersonas.SelectedItem.ToString();
 
-            // Eliminar la línea rechazada
-            EliminarLineaOperacion("operacion_cambio_persona.csv", lineaSeleccionada);
+            // Usamos el método del gestor en la capa negocio
+            gestorCambioPersona.RechazarCambioPersona(lineaSeleccionada);
 
             MessageBox.Show("Modificación rechazada correctamente.");
             CargarCambioPersonas();
-
-
         }
+
+
 
         private void btnActualizarCredencial_Click(object sender, EventArgs e)
         {
@@ -149,12 +148,10 @@ namespace TemplateTPCorto
 
             string lineaSeleccionada = lstCambioCredenciales.SelectedItem.ToString();
 
-            ModificarCredencial modCred = new ModificarCredencial();
-            bool aplicado = modCred.AplicarCambioContrasena(lineaSeleccionada);
+            bool aplicado = gestorCambioCredenciales.AplicarCambioCredencial(lineaSeleccionada);
 
             if (aplicado)
             {
-                EliminarLineaOperacion("operacion_cambio_credencial.csv", lineaSeleccionada);
                 lstCambioCredenciales.Items.Remove(lstCambioCredenciales.SelectedItem);
                 MessageBox.Show("Cambio aplicado correctamente.");
             }
@@ -172,52 +169,13 @@ namespace TemplateTPCorto
                 return;
             }
 
-            string lineaSeleccionada = ((ListItem)lstCambioCredenciales.SelectedItem).LineaOriginal;
+            string lineaSeleccionada = lstCambioCredenciales.SelectedItem.ToString();
 
-
-            EliminarLineaOperacion("operacion_cambio_credencial.csv", lineaSeleccionada);
+            gestorCambioCredenciales.RechazarCambioCredencial(lineaSeleccionada);
 
             MessageBox.Show("Modificación de credencial rechazada correctamente.");
             CargarCambioCredenciales();
 
         }
-
-
-        private void EliminarLineaOperacion(string nombreArchivo, string lineaAEliminar)
-        {
-            DataBaseUtils dbUtils = new DataBaseUtils();
-            List<string> lineas = dbUtils.BuscarDatosPersistencia(nombreArchivo);
-
-            string idOperacionEliminar = lineaAEliminar.Split(';')[0].Trim();
-
-            Console.WriteLine($"Buscando eliminar idOperacion: {idOperacionEliminar}");
-            Console.WriteLine($"Archivo a modificar: {nombreArchivo}");
-            Console.WriteLine($"Líneas totales: {lineas.Count}");
-
-            foreach (var l in lineas)
-            {
-                var idOp = l.Split(';')[0].Trim();
-                Console.WriteLine($"idOperacion archivo: {idOp}");
-            }
-
-            var nuevasLineas = lineas.Where(l =>
-            {
-                if (string.IsNullOrWhiteSpace(l)) return false;
-                string idOperacionActual = l.Split(';')[0].Trim();
-                return idOperacionActual != idOperacionEliminar;
-            }).ToList();
-
-            Console.WriteLine($"Líneas después de filtro: {nuevasLineas.Count}");
-
-            try
-            {
-                dbUtils.SobrescribirArchivo(nombreArchivo, nuevasLineas);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al eliminar la línea: " + ex.Message);
-            }
-        }
-
     }
 }

@@ -82,12 +82,6 @@
     <Compile Include="FormOperador.Designer.cs">
       <DependentUpon>FormOperador.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSeleccionPerfil.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormSeleccionPerfil.Designer.cs">
-      <DependentUpon>FormSeleccionPerfil.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormSupervisor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,9 +113,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOperador.resx">
       <DependentUpon>FormOperador.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormSeleccionPerfil.resx">
-      <DependentUpon>FormSeleccionPerfil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSupervisor.resx">
       <DependentUpon>FormSupervisor.cs</DependentUpon>

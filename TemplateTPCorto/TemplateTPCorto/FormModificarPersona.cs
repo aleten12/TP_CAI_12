@@ -20,17 +20,17 @@ namespace TemplateTPCorto
 
         private void btbGuardar_Click(object sender, EventArgs e)
         {
+            if (cbxLegajos.SelectedItem == null)
+            {
+                MessageBox.Show("Se debe seleccionar un legajo.");
+                return;
+            }
+
             string legajo = cbxLegajos.SelectedItem.ToString();
             string nombre = txbNombre.Text.Trim();
             string apellido = txbApellido.Text.Trim();
             string dni = txbDni.Text.Trim();
             string fechaIngreso = dtpFechaIngreso.Value.ToString("d/M/yyyy");
-
-            if (string.IsNullOrEmpty(legajo))
-            {
-                MessageBox.Show("Se debe seleccionar un legajo.");
-                return;
-            }
 
             ModificarPersona mp = new ModificarPersona();
             mp.RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);

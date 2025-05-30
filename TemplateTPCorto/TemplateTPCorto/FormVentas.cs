@@ -1,4 +1,6 @@
-﻿using Datos.Ventas;
+﻿using Datos.Seguridad;
+using Datos.Ventas;
+using Negocio.Fase2.Negocio;
 using Persistencia;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,8 @@ using System.Windows.Forms;
 namespace TemplateTPCorto
 {
     public partial class FormVentas : Form
-    {
+    { 
+        private List<Cliente> listaClientes = new List<Cliente>();
         public FormVentas()
         {
             InitializeComponent();
@@ -42,6 +45,53 @@ namespace TemplateTPCorto
             {
                 MessageBox.Show($"Error al enviar el producto con ID: {resultado.IdProducto}\nDetalle: {resultado.ErrorMensaje}");
             }
+        }
+
+        private void btnAgregarCarrito_Click(object sender, EventArgs e)
+        {
+            if (cbxClientes.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un Cliente antes de continuar la operación.");
+            }
+
+        }
+
+        private void IniciarTotales()
+        {
+            lblSubtotal.Text = "0.00";
+            lblTotal.Text = "0.00";
+        }
+
+        private void CargarCategoriasProductos()
+        {
+
+            VentasNegocio ventasNegocio = new VentasNegocio();
+
+            List<CategoriaProductos> categoriaProductos = ventasNegocio.obtenerCategoriaProductos();
+
+            foreach (CategoriaProductos categoriaProducto in categoriaProductos)
+            {
+                cbxCategoriaProductos.Items.Add(categoriaProducto.ToString());
+            }
+        }
+
+        private void CargarClientes()
+        {
+            VentasNegocio vn = new VentasNegocio();
+            listaClientes = vn.obtenerClientes();
+
+            foreach (Cliente cliente in listaClientes)
+            {
+                cbxClientes.Items.Add(cliente.ToString());
+            }
+
+        }
+
+        private void FormVentas_Load(object sender, EventArgs e)
+        {
+          CargarClientes();   
+          IniciarTotales();
+          CargarCategoriasProductos();
         }
     }
 }

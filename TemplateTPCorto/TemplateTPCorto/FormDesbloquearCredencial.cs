@@ -20,12 +20,18 @@ namespace TemplateTPCorto
 
         private void btbModificarContrasena_Click(object sender, EventArgs e)
         {
+            if (cbxLegajos.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un legajo para continuar.");
+                return;
+            }
+
             string legajo = cbxLegajos.SelectedItem.ToString();
             string nuevaContrasena = txbContrasena.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(legajo) || string.IsNullOrWhiteSpace(nuevaContrasena))
+            if (string.IsNullOrWhiteSpace(nuevaContrasena))
             {
-                MessageBox.Show("Seleccioná un legajo y escribí una nueva contraseña.");
+                MessageBox.Show("Debes ingresar una nueva contraseña.");
                 return;
             }
 

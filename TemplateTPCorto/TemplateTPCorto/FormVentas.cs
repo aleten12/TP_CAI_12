@@ -24,27 +24,43 @@ namespace TemplateTPCorto
 
         private void btnCargarVenta_Click(object sender, EventArgs e)
         {
-            //VENTA EJEMPLO. BORRAR UNA VEZ INCORPORADA TODA LA LÓGICA ANTERIOR
-            Venta venta = new Venta
+            if (cbxClientes.SelectedIndex == -1)
             {
-                IdCliente = Guid.Parse("d2541fe1-681c-426d-bb87-05479efdf51f"),
-                IdUsuario = Guid.Parse("784c07f2-2b26-4973-9235-4064e94832b5"),
-                IdProducto = Guid.Parse("8e5942df-52fb-4d84-86a9-3862c931649a"),
-                Cantidad = 1
-            };
-            //////////////////////////
+                MessageBox.Show("Debe seleccionar un Cliente.");
+                return;
+            }
+
+            Cliente clienteSeleccionado = listaClientes[cbxClientes.SelectedIndex];
+            Guid idUsuario = Guid.Parse("784c07f2-2b26-4973-9235-4064e94832b5"); // REEMPLAZAR CON ID DEL USUARIO LOGUEADO
 
             VentaPersistencia persistencia = new VentaPersistencia();
-            ResultadoVenta resultado = persistencia.agregarVenta(venta);
 
-            if (resultado.Exito)
+            for (int i = 0; i < carrito.Count; i++)
             {
-                MessageBox.Show("Venta enviada correctamente.");
+                Producto producto = carrito[i].Item1;
+                int cantidad = carrito[i].Item2;
+
+                Venta venta = new Venta
+                {
+                    IdCliente = clienteSeleccionado.Id,
+                    IdUsuario = idUsuario,
+                    IdProducto = producto.Id,
+                    Cantidad = cantidad
+                };
+
+                ResultadoVenta resultado = persistencia.agregarVenta(venta);
+
+                if (!resultado.Exito)
+                {
+                    MessageBox.Show("Error al enviar producto: " + producto.Nombre + "\nDetalle: " + resultado.ErrorMensaje);
+                }
             }
-            else
-            {
-                MessageBox.Show($"Error al enviar el producto con ID: {resultado.IdProducto}\nDetalle: {resultado.ErrorMensaje}");
-            }
+
+            MessageBox.Show("Venta enviada con éxito.");
+
+            carrito.Clear();
+            lstCarrito.Items.Clear();
+            ActualizarTotales();
         }
 
         private void btnAgregarCarrito_Click(object sender, EventArgs e)
@@ -52,8 +68,54 @@ namespace TemplateTPCorto
             if (cbxClientes.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe seleccionar un Cliente antes de continuar la operación.");
+                return;
             }
 
+            if (lstProducto.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un producto.");
+                return;
+            }
+
+            Producto productoSeleccionado = (Producto)lstProducto.SelectedItem;
+            int cantidad = 1; 
+
+            carrito.Add(new Tuple<Producto, int>(productoSeleccionado, cantidad));
+            lstCarrito.Items.Add(productoSeleccionado.Nombre + " x" + cantidad + " = $" + (productoSeleccionado.Precio * cantidad).ToString("0.00"));
+
+            ActualizarTotales();
+        }
+
+        private void cbxCategoriaProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nombreCategoria = cbxCategoriaProductos.SelectedItem.ToString();
+
+            VentasNegocio ventasNegocio = new VentasNegocio();
+            List<CategoriaProductos> categorias = ventasNegocio.obtenerCategoriaProductos();
+
+            CategoriaProductos categoriaSeleccionada = null;
+
+            foreach (CategoriaProductos categoria in categorias)
+            {
+                if (categoria.ToString() == nombreCategoria)
+                {
+                    categoriaSeleccionada = categoria;
+                    break;
+                }
+            }
+
+            if (categoriaSeleccionada != null)
+            {
+                ProductoPersistencia productoPersistencia = new ProductoPersistencia();
+                List<Producto> productos = productoPersistencia.obtenerProductosPorCategoria(categoriaSeleccionada.Id);
+
+                lstProducto.Items.Clear();
+
+                foreach (Producto producto in productos)
+                {
+                    lstProducto.Items.Add(producto);
+                }
+            }
         }
 
         private void IniciarTotales()
@@ -62,17 +124,37 @@ namespace TemplateTPCorto
             lblTotal.Text = "0.00";
         }
 
+        private void ActualizarTotales()
+        {
+            decimal subtotal = 0;
+
+            for (int i = 0; i < carrito.Count; i++)
+            {
+                Producto producto = carrito[i].Item1;
+                int cantidad = carrito[i].Item2;
+                subtotal += producto.Precio * cantidad;
+            }
+
+            lblSubtotal.Text = subtotal.ToString("0.00");
+            lblTotal.Text = subtotal.ToString("0.00"); //SE PUEDE HACER LA LÓGICA DE DESCUENTO DESDE ACÁ
+        }
+
+        private List<Tuple<Producto, int>> carrito = new List<Tuple<Producto, int>>();
+
+
         private void CargarCategoriasProductos()
         {
-
             VentasNegocio ventasNegocio = new VentasNegocio();
+            List<CategoriaProductos> categorias = ventasNegocio.obtenerCategoriaProductos();
 
-            List<CategoriaProductos> categoriaProductos = ventasNegocio.obtenerCategoriaProductos();
-
-            foreach (CategoriaProductos categoriaProducto in categoriaProductos)
+            cbxCategoriaProductos.Items.Clear();
+            foreach (CategoriaProductos categoria in categorias)
             {
-                cbxCategoriaProductos.Items.Add(categoriaProducto.ToString());
+                cbxCategoriaProductos.Items.Add(categoria);
             }
+
+            cbxCategoriaProductos.DisplayMember = "_descripcion";
+            cbxCategoriaProductos.ValueMember = "_id";            
         }
 
         private void CargarClientes()
@@ -93,5 +175,7 @@ namespace TemplateTPCorto
           IniciarTotales();
           CargarCategoriasProductos();
         }
+
+
     }
 }

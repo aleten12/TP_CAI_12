@@ -86,6 +86,27 @@ namespace TemplateTPCorto
             ActualizarTotales();
         }
 
+        private void btnListarProductos_Click(object sender, EventArgs e)
+        {
+            if (cbxCategoriaProductos.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar una categoría.");
+                return;
+            }
+
+            CategoriaProductos categoriaSeleccionada = (CategoriaProductos)cbxCategoriaProductos.SelectedItem;
+
+            ProductoPersistencia persistencia = new ProductoPersistencia();
+            List<Producto> productos = persistencia.obtenerProductosPorCategoria(categoriaSeleccionada.Id);
+
+            lstProducto.Items.Clear();
+
+            foreach (Producto p in productos)
+            {
+                lstProducto.Items.Add(p);
+            }
+        }
+
         private void cbxCategoriaProductos_SelectedIndexChanged(object sender, EventArgs e)
         {
             string nombreCategoria = cbxCategoriaProductos.SelectedItem.ToString();

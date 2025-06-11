@@ -198,6 +198,24 @@ namespace TemplateTPCorto
           CargarCategoriasProductos();
         }
 
+        private void btnQuitar_Click(object sender, EventArgs e)
+        {
+            if (lstCarrito.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un producto del carrito para quitar.");
+                return;
+            }
 
+            int indiceSeleccionado = lstCarrito.SelectedIndex;
+
+            // Quitar de la lista lógica
+            carrito.RemoveAt(indiceSeleccionado);
+
+            // Quitar de la lista visual
+            lstCarrito.Items.RemoveAt(indiceSeleccionado);
+
+            // Actualizar totales
+            ActualizarTotales();
+        }
     }
 }

@@ -147,17 +147,18 @@ namespace TemplateTPCorto
 
         private void ActualizarTotales()
         {
-            decimal subtotal = 0;
+            VentasNegocio ventasNegocio = new VentasNegocio();
+            List<CategoriaProductos> categorias = ventasNegocio.obtenerCategoriaProductos();
 
-            for (int i = 0; i < carrito.Count; i++)
-            {
-                Producto producto = carrito[i].Item1;
-                int cantidad = carrito[i].Item2;
-                subtotal += producto.Precio * cantidad;
-            }
+            decimal subtotal;
+            bool aplicaDescuento;
+
+            decimal total = Descuento.CalcularDescuento(carrito, categorias, out subtotal, out aplicaDescuento);
 
             lblSubtotal.Text = subtotal.ToString("0.00");
-            lblTotal.Text = subtotal.ToString("0.00"); //SE PUEDE HACER LA LÓGICA DE DESCUENTO DESDE ACÁ
+            lblTotal.Text = total.ToString("0.00");
+
+
         }
 
         private List<Tuple<Producto, int>> carrito = new List<Tuple<Producto, int>>();

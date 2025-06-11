@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContrasenaNegocio.cs" />
+    <Compile Include="Fase2.Negocio\Descuento.cs" />
     <Compile Include="Fase2.Negocio\ProductoNegocio.cs" />
     <Compile Include="Fase2.Negocio\VentasNegocio.cs" />
     <Compile Include="GestorCambioCredenciales.cs" />

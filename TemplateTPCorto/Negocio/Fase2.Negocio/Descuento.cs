@@ -33,7 +33,7 @@ namespace Negocio.Fase2.Negocio
             }
 
             // Aplica descuento si contiene Electro Hogar O si el subtotal supera 1 millón
-            aplicaDescuento = contieneElectroHogar || subtotal > 1000000;
+            aplicaDescuento = contieneElectroHogar && subtotal > 1000000;
 
             return aplicaDescuento ? subtotal * 0.85m : subtotal;
         }

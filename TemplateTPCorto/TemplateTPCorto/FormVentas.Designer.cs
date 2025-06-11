@@ -114,6 +114,8 @@
             this.txbCantidad.Name = "txbCantidad";
             this.txbCantidad.Size = new System.Drawing.Size(130, 26);
             this.txbCantidad.TabIndex = 7;
+            this.txbCantidad.TextChanged += new System.EventHandler(this.txbCantidad_TextChanged);
+            this.txbCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbCantidad_KeyPress_1);
             // 
             // btnAgregarCarrito
             // 

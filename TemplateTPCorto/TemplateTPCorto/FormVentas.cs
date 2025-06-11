@@ -20,6 +20,7 @@ namespace TemplateTPCorto
         public FormVentas()
         {
             InitializeComponent();
+
         }
 
         private void btnCargarVenta_Click(object sender, EventArgs e)
@@ -76,9 +77,14 @@ namespace TemplateTPCorto
                 MessageBox.Show("Debe seleccionar un producto.");
                 return;
             }
+            int cantidad;
+            if (!int.TryParse(txbCantidad.Text, out cantidad) || cantidad <= 0)
+            {
+                MessageBox.Show("Ingrese una cantidad válida mayor a cero.");
+                return;
+            }
 
             Producto productoSeleccionado = (Producto)lstProducto.SelectedItem;
-            int cantidad = 1; 
 
             carrito.Add(new Tuple<Producto, int>(productoSeleccionado, cantidad));
             lstCarrito.Items.Add(productoSeleccionado.Nombre + " x" + cantidad + " = $" + (productoSeleccionado.Precio * cantidad).ToString("0.00"));
@@ -216,6 +222,22 @@ namespace TemplateTPCorto
 
             // Actualizar totales
             ActualizarTotales();
+        }
+
+        private void txbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txbCantidad_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txbCantidad_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

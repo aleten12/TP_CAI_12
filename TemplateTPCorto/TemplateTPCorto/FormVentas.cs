@@ -32,9 +32,10 @@ namespace TemplateTPCorto
             }
 
             Cliente clienteSeleccionado = listaClientes[cbxClientes.SelectedIndex];
-            Guid idUsuario = Guid.Parse("784c07f2-2b26-4973-9235-4064e94832b5"); // REEMPLAZAR CON ID DEL USUARIO LOGUEADO
+            Guid idUsuario = Guid.Parse("784c07f2-2b26-4973-9235-4064e94832b5");
 
             VentaPersistencia persistencia = new VentaPersistencia();
+            bool FlagError = false;
 
             for (int i = 0; i < carrito.Count; i++)
             {
@@ -54,14 +55,19 @@ namespace TemplateTPCorto
                 if (!resultado.Exito)
                 {
                     MessageBox.Show("Error al enviar producto: " + producto.Nombre + "\nDetalle: " + resultado.ErrorMensaje);
+                    FlagError = true; //Si poseo un error no borro el carrito
+                }
+                else
+                {
+                    MessageBox.Show("Venta enviada con éxito del producto: " + producto.Nombre);
                 }
             }
-
-            MessageBox.Show("Venta enviada con éxito.");
-
-            carrito.Clear();
-            lstCarrito.Items.Clear();
-            ActualizarTotales();
+            if(!FlagError)
+            {
+                carrito.Clear();
+                lstCarrito.Items.Clear();
+                ActualizarTotales();
+            }
         }
 
         private void btnAgregarCarrito_Click(object sender, EventArgs e)
@@ -230,14 +236,6 @@ namespace TemplateTPCorto
             {
                 e.Handled = true;
             }
-        }
-        private void txbCantidad_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void txbCantidad_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-
         }
     }
 }

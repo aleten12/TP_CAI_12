@@ -16,28 +16,29 @@ namespace Negocio.Fase2.Negocio
             out bool aplicaDescuento)
         {
             subtotal = 0;
-            bool contieneElectroHogar = false;
+            decimal subtotalElectroHogar = 0;
+            const string categoriaElectroHogar = "Electro Hogar";
 
             foreach (var item in carrito)
             {
                 Producto producto = item.Item1;
                 int cantidad = item.Item2;
-                subtotal += producto.Precio * cantidad;
+                decimal totalProducto = producto.Precio * cantidad;
+                subtotal += totalProducto;
 
                 var categoria = categorias.FirstOrDefault(c => c.Id == producto.IdCategoria.ToString());
 
-                if (categoria != null && categoria.Detalle == "Electro Hogar")
+                if (categoria != null && categoria.Detalle == categoriaElectroHogar)
                 {
-                    contieneElectroHogar = true;
+                    subtotalElectroHogar += totalProducto;
                 }
             }
 
-            // Aplica descuento si contiene Electro Hogar O si el subtotal supera 1 millón
-            aplicaDescuento = contieneElectroHogar && subtotal > 1000000;
+            aplicaDescuento = subtotalElectroHogar > 1000000;
 
-            return aplicaDescuento ? subtotal * 0.85m : subtotal;
+            decimal descuentoElectroHogar = aplicaDescuento ? subtotalElectroHogar * 0.15m : 0;
+            return subtotal - descuentoElectroHogar;
         }
-
 
     }
 }

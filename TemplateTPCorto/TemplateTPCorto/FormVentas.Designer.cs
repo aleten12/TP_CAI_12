@@ -44,6 +44,7 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblSubtotalNum = new System.Windows.Forms.Label();
             this.lblTotalNum = new System.Windows.Forms.Label();
+            this.lblErrorStock = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCliente
@@ -113,7 +114,9 @@
             this.txbCantidad.Location = new System.Drawing.Point(177, 471);
             this.txbCantidad.Name = "txbCantidad";
             this.txbCantidad.Size = new System.Drawing.Size(130, 26);
-            this.txbCantidad.TabIndex = 7;            // 
+            this.txbCantidad.TabIndex = 7;
+            this.txbCantidad.TextChanged += new System.EventHandler(this.txbCantidad_TextChanged_1);
+            // 
             // btnAgregarCarrito
             // 
             this.btnAgregarCarrito.Location = new System.Drawing.Point(200, 548);
@@ -156,7 +159,7 @@
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(698, 458);
+            this.lblSubtotal.Location = new System.Drawing.Point(792, 458);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(69, 20);
             this.lblSubtotal.TabIndex = 12;
@@ -165,7 +168,7 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(698, 492);
+            this.lblTotal.Location = new System.Drawing.Point(792, 492);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(44, 20);
             this.lblTotal.TabIndex = 13;
@@ -174,7 +177,7 @@
             // lblSubtotalNum
             // 
             this.lblSubtotalNum.AutoSize = true;
-            this.lblSubtotalNum.Location = new System.Drawing.Point(796, 458);
+            this.lblSubtotalNum.Location = new System.Drawing.Point(698, 458);
             this.lblSubtotalNum.Name = "lblSubtotalNum";
             this.lblSubtotalNum.Size = new System.Drawing.Size(69, 20);
             this.lblSubtotalNum.TabIndex = 14;
@@ -183,17 +186,29 @@
             // lblTotalNum
             // 
             this.lblTotalNum.AutoSize = true;
-            this.lblTotalNum.Location = new System.Drawing.Point(796, 492);
+            this.lblTotalNum.Location = new System.Drawing.Point(698, 492);
             this.lblTotalNum.Name = "lblTotalNum";
             this.lblTotalNum.Size = new System.Drawing.Size(44, 20);
             this.lblTotalNum.TabIndex = 15;
             this.lblTotalNum.Text = "Total";
+            // 
+            // lblErrorStock
+            // 
+            this.lblErrorStock.AutoSize = true;
+            this.lblErrorStock.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorStock.Location = new System.Drawing.Point(324, 474);
+            this.lblErrorStock.Name = "lblErrorStock";
+            this.lblErrorStock.Size = new System.Drawing.Size(294, 20);
+            this.lblErrorStock.TabIndex = 16;
+            this.lblErrorStock.Text = "\"La cantidad supera el stock disponible.\"";
+            this.lblErrorStock.Visible = false;
             // 
             // FormVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 646);
+            this.Controls.Add(this.lblErrorStock);
             this.Controls.Add(this.lblTotalNum);
             this.Controls.Add(this.lblSubtotalNum);
             this.Controls.Add(this.lblTotal);
@@ -237,5 +252,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label lblSubtotalNum;
         private System.Windows.Forms.Label lblTotalNum;
+        private System.Windows.Forms.Label lblErrorStock;
     }
 }

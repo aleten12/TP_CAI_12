@@ -43,5 +43,19 @@ namespace Negocio.Fase2.Negocio
             return categoriaProductos;
         }
 
+        public string ValidarStockMensaje(int cantidadIngresada, int stockDisponible)
+        {
+            if (cantidadIngresada <= 0)
+            {
+                return "La cantidad debe ser mayor a cero.";
+            }
+
+            if (cantidadIngresada > stockDisponible)
+            {
+                return "La cantidad supera el stock disponible." + Environment.NewLine + $"Hay {stockDisponible} unidades en stock.";
+            }
+
+            return ""; // Sin errores
+        }
     }
 }

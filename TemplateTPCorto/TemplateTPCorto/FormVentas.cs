@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -83,6 +84,7 @@ namespace TemplateTPCorto
                 MessageBox.Show("Debe seleccionar un producto.");
                 return;
             }
+
             int cantidad;
             if (!int.TryParse(txbCantidad.Text, out cantidad) || cantidad <= 0)
             {
@@ -96,6 +98,7 @@ namespace TemplateTPCorto
             lstCarrito.Items.Add(productoSeleccionado.Nombre + " x" + cantidad + " = $" + (productoSeleccionado.Precio * cantidad).ToString("0.00"));
 
             ActualizarTotales();
+            txbCantidad.Text = "";
         }
 
         private void btnListarProductos_Click(object sender, EventArgs e)
@@ -119,37 +122,6 @@ namespace TemplateTPCorto
             }
         }
 
-        private void cbxCategoriaProductos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string nombreCategoria = cbxCategoriaProductos.SelectedItem.ToString();
-
-            VentasNegocio ventasNegocio = new VentasNegocio();
-            List<CategoriaProductos> categorias = ventasNegocio.obtenerCategoriaProductos();
-
-            CategoriaProductos categoriaSeleccionada = null;
-
-            foreach (CategoriaProductos categoria in categorias)
-            {
-                if (categoria.ToString() == nombreCategoria)
-                {
-                    categoriaSeleccionada = categoria;
-                    break;
-                }
-            }
-
-            if (categoriaSeleccionada != null)
-            {
-                ProductoPersistencia productoPersistencia = new ProductoPersistencia();
-                List<Producto> productos = productoPersistencia.obtenerProductosPorCategoria(categoriaSeleccionada.Id);
-
-                lstProducto.Items.Clear();
-
-                foreach (Producto producto in productos)
-                {
-                    lstProducto.Items.Add(producto);
-                }
-            }
-        }
 
         private void IniciarTotales()
         {
@@ -230,12 +202,29 @@ namespace TemplateTPCorto
             ActualizarTotales();
         }
 
-        private void txbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        private void txbCantidad_TextChanged_1(object sender, EventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            btnAgregarCarrito.Enabled = false;
+
+            if (!int.TryParse(txbCantidad.Text, out int cantidadIngresada))
             {
-                e.Handled = true;
+                lblErrorStock.Text = "Ingrese una cantidad válida.";
+                lblErrorStock.Visible = true;
+                return;
             }
+
+            Producto productoSeleccionado = (Producto)lstProducto.SelectedItem;
+            int stockDisponible = productoSeleccionado.Stock;
+
+            VentasNegocio negocio = new VentasNegocio();
+            string mensaje = negocio.ValidarStockMensaje(cantidadIngresada, stockDisponible);
+
+            lblErrorStock.Visible = !string.IsNullOrEmpty(mensaje);
+            lblErrorStock.Text = mensaje;
+
+            //Si el mensaje de error es vacio, muestra el boton
+            btnAgregarCarrito.Enabled = string.IsNullOrEmpty(mensaje);
         }
     }
+    
 }

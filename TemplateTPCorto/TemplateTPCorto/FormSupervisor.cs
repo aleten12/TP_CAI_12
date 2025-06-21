@@ -18,6 +18,13 @@ namespace TemplateTPCorto
             InitializeComponent();
         }
 
+        public FormSupervisor(Credencial credencial)
+        {
+            InitializeComponent();
+            Credencial = credencial;
+        }
+        public Credencial Credencial { get; }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FormModificarPersona formModificarPersona = new FormModificarPersona();
@@ -25,7 +32,6 @@ namespace TemplateTPCorto
             this.Hide();
         }
 
-     
         private void button2_Click(object sender, EventArgs e)
         {
             FormDesbloquearCredencial formDesbloquearCredencial = new FormDesbloquearCredencial();
@@ -36,6 +42,15 @@ namespace TemplateTPCorto
         private void FormSupervisor_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCambiarContraseña_Click(object sender, EventArgs e)
+        {
+            FormContrasena formContrasena = new FormContrasena();
+            formContrasena.UsuarioAutenticado = Credencial;
+            formContrasena.Show();
+            this.Hide();
+            return;
         }
     }
 }

@@ -30,13 +30,15 @@
         {
             this.btnCargarVentas = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCargarVentas
             // 
-            this.btnCargarVentas.Location = new System.Drawing.Point(162, 165);
+            this.btnCargarVentas.Location = new System.Drawing.Point(216, 206);
+            this.btnCargarVentas.Margin = new System.Windows.Forms.Padding(4);
             this.btnCargarVentas.Name = "btnCargarVentas";
-            this.btnCargarVentas.Size = new System.Drawing.Size(254, 55);
+            this.btnCargarVentas.Size = new System.Drawing.Size(339, 69);
             this.btnCargarVentas.TabIndex = 0;
             this.btnCargarVentas.Text = "Cargar Ventas";
             this.btnCargarVentas.UseVisualStyleBackColor = true;
@@ -45,20 +47,33 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(204, 122);
+            this.label1.Location = new System.Drawing.Point(272, 152);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 20);
+            this.label1.Size = new System.Drawing.Size(227, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "¡Bienvenido Operador!";
             // 
+            // btnCambiarContraseña
+            // 
+            this.btnCambiarContraseña.Location = new System.Drawing.Point(216, 283);
+            this.btnCambiarContraseña.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCambiarContraseña.Name = "btnCambiarContraseña";
+            this.btnCambiarContraseña.Size = new System.Drawing.Size(339, 69);
+            this.btnCambiarContraseña.TabIndex = 2;
+            this.btnCambiarContraseña.Text = "Cambiar contraseña";
+            this.btnCambiarContraseña.UseVisualStyleBackColor = true;
+            this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
+            // 
             // FormOperador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 360);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCargarVentas);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormOperador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormOperador";
@@ -72,5 +87,6 @@
 
         private System.Windows.Forms.Button btnCargarVentas;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCambiarContraseña;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,17 @@ namespace TemplateTPCorto
 {
     public partial class FormOperador : Form
     {
+        public Credencial Credencial { get; }
+
         public FormOperador()
         {
             InitializeComponent();
+        }
+
+        public FormOperador(Credencial credencial)
+        {
+            InitializeComponent();
+            Credencial = credencial;
         }
 
         private void FormOperador_Load(object sender, EventArgs e)
@@ -27,6 +36,15 @@ namespace TemplateTPCorto
             FormVentas formVentas = new FormVentas();
             formVentas.Show();
             this.Hide();
+        }
+
+        private void btnCambiarContraseña_Click(object sender, EventArgs e)
+        {
+            FormContrasena formContrasena = new FormContrasena();
+            formContrasena.UsuarioAutenticado = Credencial;
+            formContrasena.Show();
+            this.Hide();
+            return;
         }
     }
 }

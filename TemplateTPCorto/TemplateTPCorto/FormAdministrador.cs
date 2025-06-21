@@ -11,6 +11,7 @@ using System.IO;
 using Negocio;
 using Persistencia;
 using Persistencia.DataBase;
+using Datos;
 
 namespace TemplateTPCorto
 {
@@ -27,6 +28,12 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
         }
+        public FormAdministrador(Credencial credencial)
+        {
+            InitializeComponent();
+            Credencial = credencial;
+        }
+        public Credencial Credencial { get; }
 
         // Constructor opcional con legajo
         public FormAdministrador(string legajo)
@@ -176,6 +183,15 @@ namespace TemplateTPCorto
             MessageBox.Show("Modificación de credencial rechazada correctamente.");
             CargarCambioCredenciales();
 
+        }
+
+        private void btnCambiarContraseña_Click_Click(object sender, EventArgs e)
+        {
+            FormContrasena formContrasena = new FormContrasena();
+            formContrasena.UsuarioAutenticado = Credencial;
+            formContrasena.Show();
+            this.Hide();
+            return;
         }
     }
 }

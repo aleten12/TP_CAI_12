@@ -78,7 +78,7 @@ namespace TemplateTPCorto
             //Verifico si encuentro Perfil
             if (perfilesDelUsuario != null)
             {
-                AbrirFormularioPorPerfil(perfilesDelUsuario[0]._descripcion);
+                AbrirFormularioPorPerfil(perfilesDelUsuario[0]._descripcion,credencial);
            
             }
             else
@@ -87,21 +87,21 @@ namespace TemplateTPCorto
             }
         }
 
-        private void AbrirFormularioPorPerfil(string descripcionPerfil)
+        private void AbrirFormularioPorPerfil(string descripcionPerfil, Credencial credencial)
         {
             if (descripcionPerfil == "Supervisor")
             {
-                FormSupervisor formSupervisor = new FormSupervisor();
+                FormSupervisor formSupervisor = new FormSupervisor(credencial);
                 formSupervisor.Show();
             }
             else if (descripcionPerfil == "Administrador") 
             {
-                FormAdministrador formAdministrador = new FormAdministrador();
+                FormAdministrador formAdministrador = new FormAdministrador(credencial);
                 formAdministrador.Show();
             }
             else if (descripcionPerfil == "Operador")
             {
-                FormOperador formOperador = new FormOperador();
+                FormOperador formOperador = new FormOperador(credencial);
                 formOperador.Show();
             }
             else

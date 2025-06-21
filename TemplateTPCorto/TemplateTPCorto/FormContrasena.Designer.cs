@@ -38,24 +38,27 @@
             // lblContraseña
             // 
             this.lblContraseña.AutoSize = true;
-            this.lblContraseña.Location = new System.Drawing.Point(203, 160);
+            this.lblContraseña.Location = new System.Drawing.Point(271, 200);
+            this.lblContraseña.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContraseña.Name = "lblContraseña";
-            this.lblContraseña.Size = new System.Drawing.Size(143, 20);
+            this.lblContraseña.Size = new System.Drawing.Size(194, 25);
             this.lblContraseña.TabIndex = 0;
             this.lblContraseña.Text = "Contraseña nueva ";
             // 
             // txtContrasenaNueva
             // 
-            this.txtContrasenaNueva.Location = new System.Drawing.Point(207, 195);
+            this.txtContrasenaNueva.Location = new System.Drawing.Point(276, 244);
+            this.txtContrasenaNueva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtContrasenaNueva.Name = "txtContrasenaNueva";
-            this.txtContrasenaNueva.Size = new System.Drawing.Size(271, 26);
+            this.txtContrasenaNueva.Size = new System.Drawing.Size(360, 31);
             this.txtContrasenaNueva.TabIndex = 1;
             // 
             // btbActualizarContraseña
             // 
-            this.btbActualizarContraseña.Location = new System.Drawing.Point(207, 260);
+            this.btbActualizarContraseña.Location = new System.Drawing.Point(276, 325);
+            this.btbActualizarContraseña.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btbActualizarContraseña.Name = "btbActualizarContraseña";
-            this.btbActualizarContraseña.Size = new System.Drawing.Size(271, 39);
+            this.btbActualizarContraseña.Size = new System.Drawing.Size(361, 49);
             this.btbActualizarContraseña.TabIndex = 2;
             this.btbActualizarContraseña.Text = "Actualizar Contraseña";
             this.btbActualizarContraseña.UseVisualStyleBackColor = true;
@@ -64,32 +67,34 @@
             // lblContraseñaActual
             // 
             this.lblContraseñaActual.AutoSize = true;
-            this.lblContraseñaActual.Location = new System.Drawing.Point(203, 78);
+            this.lblContraseñaActual.Location = new System.Drawing.Point(271, 98);
+            this.lblContraseñaActual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContraseñaActual.Name = "lblContraseñaActual";
-            this.lblContraseñaActual.Size = new System.Drawing.Size(139, 20);
+            this.lblContraseñaActual.Size = new System.Drawing.Size(187, 25);
             this.lblContraseñaActual.TabIndex = 3;
             this.lblContraseñaActual.Text = "Contraseña actual";
             // 
             // txtContrasenaActual
             // 
-            this.txtContrasenaActual.Location = new System.Drawing.Point(207, 115);
+            this.txtContrasenaActual.Location = new System.Drawing.Point(276, 144);
+            this.txtContrasenaActual.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtContrasenaActual.Name = "txtContrasenaActual";
-            this.txtContrasenaActual.Size = new System.Drawing.Size(271, 26);
+            this.txtContrasenaActual.Size = new System.Drawing.Size(360, 31);
             this.txtContrasenaActual.TabIndex = 4;
             // 
             // FormContrasena
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 414);
+            this.ClientSize = new System.Drawing.Size(940, 518);
             this.Controls.Add(this.txtContrasenaActual);
             this.Controls.Add(this.lblContraseñaActual);
             this.Controls.Add(this.btbActualizarContraseña);
             this.Controls.Add(this.txtContrasenaNueva);
             this.Controls.Add(this.lblContraseña);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormContrasena";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormContraseña";
             this.ResumeLayout(false);
             this.PerformLayout();
 

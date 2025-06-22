@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIPrincipal));
             this.MenuVertical = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btbCambiarContrasena = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btbCerrar = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.lblLeyenda = new System.Windows.Forms.Label();
             this.lblBienvenido = new System.Windows.Forms.Label();
-            this.btbCambiarContrasena = new System.Windows.Forms.Button();
             this.MenuVertical.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -78,6 +78,23 @@
             this.panel1.Size = new System.Drawing.Size(250, 650);
             this.panel1.TabIndex = 0;
             // 
+            // btbCambiarContrasena
+            // 
+            this.btbCambiarContrasena.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btbCambiarContrasena.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btbCambiarContrasena.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btbCambiarContrasena.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btbCambiarContrasena.Image = ((System.Drawing.Image)(resources.GetObject("btbCambiarContrasena.Image")));
+            this.btbCambiarContrasena.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btbCambiarContrasena.Location = new System.Drawing.Point(0, 428);
+            this.btbCambiarContrasena.Name = "btbCambiarContrasena";
+            this.btbCambiarContrasena.Size = new System.Drawing.Size(250, 50);
+            this.btbCambiarContrasena.TabIndex = 5;
+            this.btbCambiarContrasena.Text = "   Cambiar clave";
+            this.btbCambiarContrasena.UseVisualStyleBackColor = true;
+            this.btbCambiarContrasena.Visible = false;
+            this.btbCambiarContrasena.Click += new System.EventHandler(this.btbCambiarContrasena_Click);
+            // 
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
@@ -99,6 +116,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // btbCerrar
             // 
@@ -206,23 +224,6 @@
             this.lblBienvenido.Size = new System.Drawing.Size(570, 47);
             this.lblBienvenido.TabIndex = 0;
             this.lblBienvenido.Text = "¡Bienvenido a Electro Hogar!";
-            // 
-            // btbCambiarContrasena
-            // 
-            this.btbCambiarContrasena.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.btbCambiarContrasena.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btbCambiarContrasena.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btbCambiarContrasena.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btbCambiarContrasena.Image = ((System.Drawing.Image)(resources.GetObject("btbCambiarContrasena.Image")));
-            this.btbCambiarContrasena.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btbCambiarContrasena.Location = new System.Drawing.Point(0, 428);
-            this.btbCambiarContrasena.Name = "btbCambiarContrasena";
-            this.btbCambiarContrasena.Size = new System.Drawing.Size(250, 50);
-            this.btbCambiarContrasena.TabIndex = 5;
-            this.btbCambiarContrasena.Text = "   Cambiar clave";
-            this.btbCambiarContrasena.UseVisualStyleBackColor = true;
-            this.btbCambiarContrasena.Visible = false;
-            this.btbCambiarContrasena.Click += new System.EventHandler(this.btbCambiarContrasena_Click);
             // 
             // GUIPrincipal
             // 

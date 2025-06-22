@@ -59,6 +59,7 @@ namespace TemplateTPCorto
             lblUsuario.Text = $"¡Hola,\n{nombre}!";
             lblUsuario.Visible = true;
             btbCambiarContrasena.Visible = true;
+            pictureBox1.Visible = true;
         }
 
         private void btbIngresar_Click(object sender, EventArgs e)
@@ -103,6 +104,9 @@ namespace TemplateTPCorto
             panelContenedor.Controls.Clear(); // Borra todo lo que haya
             CrearLabelLeyenda();
             CrearLabelBienvenida();
+            lblUsuario.Visible = false;
+            btbCambiarContrasena.Visible = false;
+            pictureBox1.Visible = false;
         }
 
         private void btbCambiarContrasena_Click(object sender, EventArgs e)

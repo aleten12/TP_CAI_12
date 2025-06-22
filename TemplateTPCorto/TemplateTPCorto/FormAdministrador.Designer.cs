@@ -45,9 +45,11 @@
             // 
             this.lstModificarPersonas.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstModificarPersonas.FormattingEnabled = true;
+            this.lstModificarPersonas.HorizontalScrollbar = true;
             this.lstModificarPersonas.ItemHeight = 21;
-            this.lstModificarPersonas.Location = new System.Drawing.Point(32, 106);
+            this.lstModificarPersonas.Location = new System.Drawing.Point(32, 86);
             this.lstModificarPersonas.Name = "lstModificarPersonas";
+            this.lstModificarPersonas.ScrollAlwaysVisible = true;
             this.lstModificarPersonas.Size = new System.Drawing.Size(749, 277);
             this.lstModificarPersonas.TabIndex = 0;
             this.lstModificarPersonas.SelectedIndexChanged += new System.EventHandler(this.lstModificarPersonas_SelectedIndexChanged);
@@ -56,9 +58,11 @@
             // 
             this.lstCambioCredenciales.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstCambioCredenciales.FormattingEnabled = true;
+            this.lstCambioCredenciales.HorizontalScrollbar = true;
             this.lstCambioCredenciales.ItemHeight = 21;
-            this.lstCambioCredenciales.Location = new System.Drawing.Point(32, 454);
+            this.lstCambioCredenciales.Location = new System.Drawing.Point(32, 434);
             this.lstCambioCredenciales.Name = "lstCambioCredenciales";
+            this.lstCambioCredenciales.ScrollAlwaysVisible = true;
             this.lstCambioCredenciales.Size = new System.Drawing.Size(749, 277);
             this.lstCambioCredenciales.TabIndex = 1;
             this.lstCambioCredenciales.SelectedIndexChanged += new System.EventHandler(this.lstCambioCredenciales_SelectedIndexChanged);
@@ -70,7 +74,7 @@
             this.btnAprobarModificacionPersona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAprobarModificacionPersona.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAprobarModificacionPersona.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(805, 106);
+            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(805, 86);
             this.btnAprobarModificacionPersona.Name = "btnAprobarModificacionPersona";
             this.btnAprobarModificacionPersona.Size = new System.Drawing.Size(234, 62);
             this.btnAprobarModificacionPersona.TabIndex = 2;
@@ -85,7 +89,7 @@
             this.btnRechazarModificacionPersona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarModificacionPersona.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarModificacionPersona.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(805, 199);
+            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(805, 179);
             this.btnRechazarModificacionPersona.Name = "btnRechazarModificacionPersona";
             this.btnRechazarModificacionPersona.Size = new System.Drawing.Size(234, 62);
             this.btnRechazarModificacionPersona.TabIndex = 3;
@@ -100,7 +104,7 @@
             this.btnActualizarCredencial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizarCredencial.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizarCredencial.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnActualizarCredencial.Location = new System.Drawing.Point(808, 453);
+            this.btnActualizarCredencial.Location = new System.Drawing.Point(808, 433);
             this.btnActualizarCredencial.Name = "btnActualizarCredencial";
             this.btnActualizarCredencial.Size = new System.Drawing.Size(231, 62);
             this.btnActualizarCredencial.TabIndex = 4;
@@ -115,7 +119,7 @@
             this.btnRechazarcred.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarcred.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarcred.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRechazarcred.Location = new System.Drawing.Point(808, 547);
+            this.btnRechazarcred.Location = new System.Drawing.Point(808, 527);
             this.btnRechazarcred.Name = "btnRechazarcred";
             this.btnRechazarcred.Size = new System.Drawing.Size(231, 62);
             this.btnRechazarcred.TabIndex = 5;
@@ -127,7 +131,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 68);
+            this.label1.Location = new System.Drawing.Point(28, 48);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(214, 26);
             this.label1.TabIndex = 6;
@@ -137,7 +141,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(28, 417);
+            this.label2.Location = new System.Drawing.Point(28, 397);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(268, 26);
             this.label2.TabIndex = 7;

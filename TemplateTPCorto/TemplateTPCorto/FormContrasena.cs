@@ -14,12 +14,36 @@ namespace TemplateTPCorto
 {
     public partial class FormContrasena : Form
     {
+        private FormOperador formAnterior;
         public FormContrasena()
         {
             InitializeComponent();
         }
+
+        private GUIPrincipal formPadre;
         public Credencial UsuarioAutenticado { get; set; }
 
+        public FormContrasena(Credencial usuario, GUIPrincipal principal)
+        {
+            InitializeComponent();
+            UsuarioAutenticado = usuario;
+            formPadre = principal;
+        }
+
+        public FormContrasena(FormOperador operador)
+        {
+            InitializeComponent();
+            formAnterior = operador;
+
+            // Cuando se cierra esta ventana, que se muestre la anterior
+            this.FormClosed += FormContrasena_FormClosed;
+        }
+
+        private void FormContrasena_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formAnterior.Show();
+        }
+        
         private void btbActualizarContraseña_Click(object sender, EventArgs e)
         {
             
@@ -38,9 +62,8 @@ namespace TemplateTPCorto
             if (resultadoCambiarContrasena)
             {
                 MessageBox.Show("Se ha cambiado la contraseña correctamente.");
-                FormLogin formLogin = new FormLogin();
-                formLogin.Show();
-                this.Hide();
+                formPadre.AbrirFormInPanel(new FormLogin(formPadre));
+                this.Close();
             }
             else
             {
@@ -49,6 +72,9 @@ namespace TemplateTPCorto
             }
         }
 
-       
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

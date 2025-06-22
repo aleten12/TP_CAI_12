@@ -21,14 +21,27 @@ namespace TemplateTPCorto
             InitializeComponent();
         }
 
+        private void LimpiarIngresos()
+        {
+            txtPassword.Clear();
+            txtUsuario.Clear();
+        }
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             string usuario = txtUsuario.Text;
             string password = txtPassword.Text;
 
+            if (usuario == "" || password == "")
+            {
+                MessageBox.Show("Ingrese un usuario y una constraseña válida.");
+                LimpiarIngresos();
+                return;
+            }
+
             if (password.Length < 8)
             {
                 MessageBox.Show("La contraseña debe tener al menos 8 caracteres.");
+                LimpiarIngresos();
                 return;
             }
 
@@ -38,12 +51,14 @@ namespace TemplateTPCorto
             if (loginNegocio.EsBloqueado)
             {
                 MessageBox.Show("El usuario está bloqueado.");
+                LimpiarIngresos();
                 return;
             }
 
             if (credencial == null)
             {
                 MessageBox.Show("Usuario o contraseña inválido.");
+                LimpiarIngresos();
                 return;
             }
 
@@ -51,8 +66,7 @@ namespace TemplateTPCorto
             if (loginNegocio.EsPrimerLogin)
             {
                 MessageBox.Show("Este es tu primer ingreso. Debés cambiar tu contraseña.", "Primer Login", MessageBoxButtons.OK);
-                FormContrasena formContrasena = new FormContrasena();
-                formContrasena.UsuarioAutenticado = credencial;
+                FormContrasena formContrasena = new FormContrasena(credencial, formPadre);
                 formContrasena.Show();
                 this.Hide();
                 return;
@@ -64,8 +78,7 @@ namespace TemplateTPCorto
             if (contrasenaNegocio.DebeForzarCambio(credencial))
             {
                 MessageBox.Show("Han pasado más de 30 días desde el último cambio de contraseña. Se debe realizar el cambio de contraseña.");
-                FormContrasena formContrasena = new FormContrasena();
-                formContrasena.UsuarioAutenticado = credencial;
+                FormContrasena formContrasena = new FormContrasena(credencial, formPadre);
                 formContrasena.Show();
                 this.Hide();
                 return;
@@ -75,11 +88,14 @@ namespace TemplateTPCorto
             SeguridadPersistencia seguridadPersistencia = new SeguridadPersistencia();
             List<Perfil> perfilesDelUsuario = seguridadPersistencia.ObtenerPerfilesPorUsuario(credencial.Legajo);
 
-            //Verifico si encuentro Perfil
-            if (perfilesDelUsuario != null)
+            //Verifico si encuentro perfil
+            if (perfilesDelUsuario != null && perfilesDelUsuario.Count > 0)
             {
-                AbrirFormularioPorPerfil(perfilesDelUsuario[0]._descripcion,credencial);
-           
+                string descripcionPerfil = perfilesDelUsuario[0]._descripcion;
+
+                //Llamamos al método del formulario principal para mostrar el formulario correspondiente
+                formPadre.CargarFormularioSegunPerfil(credencial, descripcionPerfil);
+                this.Close();
             }
             else
             {
@@ -87,6 +103,8 @@ namespace TemplateTPCorto
             }
         }
 
+        //SE REALIZÓ EN EL NUEVO GUI
+         /*
         private void AbrirFormularioPorPerfil(string descripcionPerfil, Credencial credencial)
         {
             if (descripcionPerfil == "Supervisor")
@@ -111,6 +129,15 @@ namespace TemplateTPCorto
             }
             this.Hide();
         }
+         */
+        private GUIPrincipal formPadre;
+
+        public FormLogin(GUIPrincipal principal)
+        {
+            InitializeComponent();
+            formPadre = principal;
+        }
+
     }
 }
 

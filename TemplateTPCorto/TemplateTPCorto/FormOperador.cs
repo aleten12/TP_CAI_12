@@ -24,8 +24,8 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
             Credencial = credencial;
+            
         }
-
         private void FormOperador_Load(object sender, EventArgs e)
         {
 
@@ -33,14 +33,14 @@ namespace TemplateTPCorto
 
         private void btnCargarVentas_Click(object sender, EventArgs e)
         {
-            FormVentas formVentas = new FormVentas();
+            FormVentas formVentas = new FormVentas(this);
             formVentas.Show();
             this.Hide();
         }
 
         private void btnCambiarContraseña_Click(object sender, EventArgs e)
         {
-            FormContrasena formContrasena = new FormContrasena();
+            FormContrasena formContrasena = new FormContrasena(this);
             formContrasena.UsuarioAutenticado = Credencial;
             formContrasena.Show();
             this.Hide();

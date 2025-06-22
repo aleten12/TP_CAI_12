@@ -18,6 +18,18 @@ namespace TemplateTPCorto
             InitializeComponent();
         }
 
+        private FormSupervisor formAnterior;
+        public FormDesbloquearCredencial(FormSupervisor supervisor)
+        {
+            InitializeComponent();
+            formAnterior = supervisor;
+            this.FormClosed += FormDesbloquearCredencial_FormClosed;
+        }
+        private void FormDesbloquearCredencial_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formAnterior.Show(); // Vuelve a mostrar el operador
+        }
+
         private void btbModificarContrasena_Click(object sender, EventArgs e)
         {
             if (cbxLegajos.SelectedItem == null)
@@ -57,6 +69,11 @@ namespace TemplateTPCorto
             {
                 cbxLegajos.Items.Add(legajo);
             }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

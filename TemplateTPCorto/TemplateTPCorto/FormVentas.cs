@@ -1,4 +1,5 @@
-﻿using Datos.Seguridad;
+﻿using Datos;
+using Datos.Seguridad;
 using Datos.Ventas;
 using Negocio.Fase2.Negocio;
 using Persistencia;
@@ -18,10 +19,19 @@ namespace TemplateTPCorto
     public partial class FormVentas : Form
     { 
         private List<Cliente> listaClientes = new List<Cliente>();
+       
         public FormVentas()
         {
             InitializeComponent();
 
+        }
+        private FormOperador formAnterior;
+
+        public FormVentas(FormOperador operador)
+        {
+            InitializeComponent();
+            formAnterior = operador;
+            this.FormClosed += FormVentas_FormClosed;
         }
 
         private void btnCargarVenta_Click(object sender, EventArgs e)
@@ -67,6 +77,9 @@ namespace TemplateTPCorto
             {
                 carrito.Clear();
                 lstCarrito.Items.Clear();
+                lstProducto.Items.Clear();
+                cbxClientes.Text = "";
+                cbxCategoriaProductos.Text = "";
                 ActualizarTotales();
             }
         }
@@ -180,7 +193,15 @@ namespace TemplateTPCorto
           CargarClientes();   
           IniciarTotales();
           CargarCategoriasProductos();
+          txbCantidad.Enabled = false; // Por defecto deshabilitado
+
         }
+
+        private void FormVentas_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formAnterior.Show(); // Vuelve a mostrar el operador
+        }
+
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
@@ -224,6 +245,26 @@ namespace TemplateTPCorto
 
             //Si el mensaje de error es vacio, muestra el boton
             btnAgregarCarrito.Enabled = string.IsNullOrEmpty(mensaje);
+        }
+       
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+        private void lstProducto_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            // Si hay un producto seleccionado, habilita el TextBox
+            if (lstProducto.SelectedIndex != -1)
+            {
+                txbCantidad.Enabled = true;
+            }
+
+            // se limpia el campo de cantidad y errores previos
+            txbCantidad.Text = "";
+            lblErrorStock.Visible = false;
+            btnAgregarCarrito.Enabled = false;
         }
     }
     

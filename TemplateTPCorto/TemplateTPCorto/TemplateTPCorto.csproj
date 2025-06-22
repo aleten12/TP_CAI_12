@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormAdministradorBienvenida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdministradorBienvenida.Designer.cs">
+      <DependentUpon>FormAdministradorBienvenida.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,8 +100,17 @@
     <Compile Include="FormVentas.Designer.cs">
       <DependentUpon>FormVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIPrincipal.Designer.cs">
+      <DependentUpon>GUIPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAdministradorBienvenida.resx">
+      <DependentUpon>FormAdministradorBienvenida.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAdministrador.resx">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormVentas.resx">
       <DependentUpon>FormVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIPrincipal.resx">
+      <DependentUpon>GUIPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

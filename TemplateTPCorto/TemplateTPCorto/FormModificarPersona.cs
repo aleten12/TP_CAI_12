@@ -18,6 +18,19 @@ namespace TemplateTPCorto
             InitializeComponent();
         }
 
+        private FormSupervisor formAnterior;
+        public FormModificarPersona(FormSupervisor supervisor)
+        {
+            InitializeComponent();
+            formAnterior = supervisor;
+            this.FormClosed += FormModificarPersona_FormClosed;
+        }
+
+        private void FormModificarPersona_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formAnterior.Show(); 
+        }
+
         private void btbGuardar_Click(object sender, EventArgs e)
         {
             if (cbxLegajos.SelectedItem == null)
@@ -26,11 +39,23 @@ namespace TemplateTPCorto
                 return;
             }
 
+            DateTime fecha;
+            if (DateTime.TryParse(txbFechaIngreso.Text, out fecha))
+            {
+                string fechaFormateada = fecha.ToString("d/M/yyyy");
+                
+            }
+            else
+            {
+                MessageBox.Show("La fecha ingresada no tiene un formato válido.");
+            }
+
+
             string legajo = cbxLegajos.SelectedItem.ToString();
             string nombre = txbNombre.Text.Trim();
             string apellido = txbApellido.Text.Trim();
             string dni = txbDni.Text.Trim();
-            string fechaIngreso = dtpFechaIngreso.Value.ToString("d/M/yyyy");
+            string fechaIngreso = fecha.ToString("d/M/yyyy");
 
             ModificarPersona mp = new ModificarPersona();
             mp.RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
@@ -49,5 +74,9 @@ namespace TemplateTPCorto
 
         }
 
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

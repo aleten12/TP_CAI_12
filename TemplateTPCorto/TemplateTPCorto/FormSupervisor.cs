@@ -27,14 +27,14 @@ namespace TemplateTPCorto
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormModificarPersona formModificarPersona = new FormModificarPersona();
+            FormModificarPersona formModificarPersona = new FormModificarPersona(this);
             formModificarPersona.Show();
             this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormDesbloquearCredencial formDesbloquearCredencial = new FormDesbloquearCredencial();
+            FormDesbloquearCredencial formDesbloquearCredencial = new FormDesbloquearCredencial(this);
             formDesbloquearCredencial.Show();
             this.Hide();
         }

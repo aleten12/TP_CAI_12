@@ -35,6 +35,19 @@ namespace TemplateTPCorto
         }
         public Credencial Credencial { get; }
 
+        private FormAdministradorBienvenida formAnterior;
+        public FormAdministrador(FormAdministradorBienvenida admin)
+        {
+            InitializeComponent();
+            formAnterior = admin;
+            this.FormClosed += FormAdministrador_FormClosed;
+        }
+
+        private void FormAdministrador_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formAnterior.Show();
+        }
+
         // Constructor opcional con legajo
         public FormAdministrador(string legajo)
         {
@@ -192,6 +205,11 @@ namespace TemplateTPCorto
             formContrasena.Show();
             this.Hide();
             return;
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

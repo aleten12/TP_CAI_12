@@ -198,15 +198,6 @@ namespace TemplateTPCorto
 
         }
 
-        private void btnCambiarContraseña_Click_Click(object sender, EventArgs e)
-        {
-            FormContrasena formContrasena = new FormContrasena();
-            formContrasena.UsuarioAutenticado = Credencial;
-            formContrasena.Show();
-            this.Hide();
-            return;
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

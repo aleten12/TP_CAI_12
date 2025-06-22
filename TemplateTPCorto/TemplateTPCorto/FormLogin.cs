@@ -95,6 +95,9 @@ namespace TemplateTPCorto
 
                 //Llamamos al método del formulario principal para mostrar el formulario correspondiente
                 formPadre.CargarFormularioSegunPerfil(credencial, descripcionPerfil);
+                string nombre = credencial.NombreUsuario; 
+                formPadre.MostrarNombreUsuario(nombre);
+                formPadre.Credencial = credencial;
                 this.Close();
             }
             else
@@ -103,33 +106,6 @@ namespace TemplateTPCorto
             }
         }
 
-        //SE REALIZÓ EN EL NUEVO GUI
-         /*
-        private void AbrirFormularioPorPerfil(string descripcionPerfil, Credencial credencial)
-        {
-            if (descripcionPerfil == "Supervisor")
-            {
-                FormSupervisor formSupervisor = new FormSupervisor(credencial);
-                formSupervisor.Show();
-            }
-            else if (descripcionPerfil == "Administrador") 
-            {
-                FormAdministrador formAdministrador = new FormAdministrador(credencial);
-                formAdministrador.Show();
-            }
-            else if (descripcionPerfil == "Operador")
-            {
-                FormOperador formOperador = new FormOperador(credencial);
-                formOperador.Show();
-            }
-            else
-            {
-                MessageBox.Show("Perfil desconocido: " + descripcionPerfil);
-                return;
-            }
-            this.Hide();
-        }
-         */
         private GUIPrincipal formPadre;
 
         public FormLogin(GUIPrincipal principal)

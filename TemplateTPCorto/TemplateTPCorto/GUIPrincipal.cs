@@ -17,7 +17,8 @@ namespace TemplateTPCorto
         {
             InitializeComponent();
         }
-
+        
+        public Credencial Credencial { get; set; }
         public void CargarFormularioSegunPerfil(Credencial credencial, string descripcionPerfil)
         {
             Form formPerfil;
@@ -52,6 +53,14 @@ namespace TemplateTPCorto
             this.panelContenedor.Tag = fh;
             fh.Show();
         }
+
+        public void MostrarNombreUsuario(string nombre)
+        {
+            lblUsuario.Text = $"¡Hola,\n{nombre}!";
+            lblUsuario.Visible = true;
+            btbCambiarContrasena.Visible = true;
+        }
+
         private void btbIngresar_Click(object sender, EventArgs e)
         {
             panelContenedor.Controls.Clear();
@@ -88,14 +97,24 @@ namespace TemplateTPCorto
             lblLeyenda.AutoSize = false;
             panelContenedor.Controls.Add(lblLeyenda);
         }
-
+        
         private void btbCerrar_Click(object sender, EventArgs e)
         {
             panelContenedor.Controls.Clear(); // Borra todo lo que haya
             CrearLabelLeyenda();
             CrearLabelBienvenida();
-           
-            
+        }
+
+        private void btbCambiarContrasena_Click(object sender, EventArgs e)
+        {
+            if (Credencial == null)
+            {
+                MessageBox.Show("No hay un usuario autenticado.");
+                return;
+            }
+
+            FormContrasena formContrasena = new FormContrasena(Credencial, this);
+            formContrasena.Show();
         }
     }
 }

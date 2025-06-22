@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOperador));
             this.btnCargarVentas = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCargarVentas
@@ -61,23 +60,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "¡Bienvenido Operador!";
             // 
-            // btnCambiarContraseña
-            // 
-            this.btnCambiarContraseña.Location = new System.Drawing.Point(348, 363);
-            this.btnCambiarContraseña.Name = "btnCambiarContraseña";
-            this.btnCambiarContraseña.Size = new System.Drawing.Size(303, 55);
-            this.btnCambiarContraseña.TabIndex = 2;
-            this.btnCambiarContraseña.Text = "Cambiar contraseña";
-            this.btnCambiarContraseña.UseVisualStyleBackColor = true;
-            this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
-            // 
             // FormOperador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1050, 600);
-            this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCargarVentas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -95,6 +83,5 @@
 
         private System.Windows.Forms.Button btnCargarVentas;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCambiarContraseña;
     }
 }

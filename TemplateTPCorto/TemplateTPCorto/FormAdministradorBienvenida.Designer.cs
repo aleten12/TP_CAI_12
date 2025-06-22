@@ -54,13 +54,13 @@
             this.btbAutorizaciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btbAutorizaciones.Location = new System.Drawing.Point(283, 227);
             this.btbAutorizaciones.Name = "btbAutorizaciones";
-            this.btbAutorizaciones.Size = new System.Drawing.Size(413, 59);
+            this.btbAutorizaciones.Size = new System.Drawing.Size(413, 70);
             this.btbAutorizaciones.TabIndex = 1;
             this.btbAutorizaciones.Text = "Autorizaciones";
             this.btbAutorizaciones.UseVisualStyleBackColor = false;
             this.btbAutorizaciones.Click += new System.EventHandler(this.btbAutorizaciones_Click);
             // 
-            // FormAdministradoBienvenida
+            // FormAdministradorBienvenida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,7 +69,7 @@
             this.Controls.Add(this.btbAutorizaciones);
             this.Controls.Add(this.lblAdmin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormAdministradoBienvenida";
+            this.Name = "FormAdministradorBienvenida";
             this.Text = "FormAdministradoBienvenida";
             this.ResumeLayout(false);
             this.PerformLayout();

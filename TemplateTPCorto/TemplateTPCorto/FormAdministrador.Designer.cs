@@ -37,7 +37,6 @@
             this.btnRechazarcred = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnCambiarContraseña_Click = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +115,7 @@
             this.btnRechazarcred.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarcred.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarcred.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRechazarcred.Location = new System.Drawing.Point(808, 553);
+            this.btnRechazarcred.Location = new System.Drawing.Point(808, 547);
             this.btnRechazarcred.Name = "btnRechazarcred";
             this.btnRechazarcred.Size = new System.Drawing.Size(231, 62);
             this.btnRechazarcred.TabIndex = 5;
@@ -144,16 +143,6 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Actualizar Credenciales";
             // 
-            // btnCambiarContraseña_Click
-            // 
-            this.btnCambiarContraseña_Click.Location = new System.Drawing.Point(808, 667);
-            this.btnCambiarContraseña_Click.Name = "btnCambiarContraseña_Click";
-            this.btnCambiarContraseña_Click.Size = new System.Drawing.Size(139, 62);
-            this.btnCambiarContraseña_Click.TabIndex = 8;
-            this.btnCambiarContraseña_Click.Text = "Cambiar contraseña";
-            this.btnCambiarContraseña_Click.UseVisualStyleBackColor = true;
-            this.btnCambiarContraseña_Click.Click += new System.EventHandler(this.btnCambiarContraseña_Click_Click);
-            // 
             // btnCerrar
             // 
             this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
@@ -174,7 +163,6 @@
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(1070, 820);
             this.Controls.Add(this.btnCerrar);
-            this.Controls.Add(this.btnCambiarContraseña_Click);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRechazarcred);
@@ -204,7 +192,6 @@
         private System.Windows.Forms.Button btnRechazarcred;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnCambiarContraseña_Click;
         private System.Windows.Forms.PictureBox btnCerrar;
     }
 }

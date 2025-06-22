@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUIPrincipal));
             this.MenuVertical = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblUsuario = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btbCerrar = new System.Windows.Forms.Button();
             this.btbIngresar = new System.Windows.Forms.Button();
             this.Logo = new System.Windows.Forms.PictureBox();
@@ -40,8 +42,10 @@
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.lblLeyenda = new System.Windows.Forms.Label();
             this.lblBienvenido = new System.Windows.Forms.Label();
+            this.btbCambiarContrasena = new System.Windows.Forms.Button();
             this.MenuVertical.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.panelTitulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).BeginInit();
@@ -62,6 +66,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panel1.Controls.Add(this.btbCambiarContrasena);
+            this.panel1.Controls.Add(this.lblUsuario);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btbCerrar);
             this.panel1.Controls.Add(this.btbIngresar);
             this.panel1.Controls.Add(this.Logo);
@@ -70,6 +77,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 650);
             this.panel1.TabIndex = 0;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblUsuario.Location = new System.Drawing.Point(82, 136);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(80, 22);
+            this.lblUsuario.TabIndex = 4;
+            this.lblUsuario.Text = "¡Hola, x!";
+            this.lblUsuario.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(20, 133);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
             // 
             // btbCerrar
             // 
@@ -82,7 +111,7 @@
             this.btbCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btbCerrar.Location = new System.Drawing.Point(7, 572);
             this.btbCerrar.Name = "btbCerrar";
-            this.btbCerrar.Size = new System.Drawing.Size(238, 40);
+            this.btbCerrar.Size = new System.Drawing.Size(238, 50);
             this.btbCerrar.TabIndex = 2;
             this.btbCerrar.Text = "Cerrar sesión";
             this.btbCerrar.UseVisualStyleBackColor = true;
@@ -99,7 +128,7 @@
             this.btbIngresar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btbIngresar.Location = new System.Drawing.Point(0, 514);
             this.btbIngresar.Name = "btbIngresar";
-            this.btbIngresar.Size = new System.Drawing.Size(250, 40);
+            this.btbIngresar.Size = new System.Drawing.Size(250, 50);
             this.btbIngresar.TabIndex = 1;
             this.btbIngresar.Text = "Ingresar";
             this.btbIngresar.UseVisualStyleBackColor = true;
@@ -178,6 +207,23 @@
             this.lblBienvenido.TabIndex = 0;
             this.lblBienvenido.Text = "¡Bienvenido a Electro Hogar!";
             // 
+            // btbCambiarContrasena
+            // 
+            this.btbCambiarContrasena.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btbCambiarContrasena.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btbCambiarContrasena.Font = new System.Drawing.Font("Century Gothic", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btbCambiarContrasena.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btbCambiarContrasena.Image = ((System.Drawing.Image)(resources.GetObject("btbCambiarContrasena.Image")));
+            this.btbCambiarContrasena.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btbCambiarContrasena.Location = new System.Drawing.Point(0, 428);
+            this.btbCambiarContrasena.Name = "btbCambiarContrasena";
+            this.btbCambiarContrasena.Size = new System.Drawing.Size(250, 50);
+            this.btbCambiarContrasena.TabIndex = 5;
+            this.btbCambiarContrasena.Text = "   Cambiar clave";
+            this.btbCambiarContrasena.UseVisualStyleBackColor = true;
+            this.btbCambiarContrasena.Visible = false;
+            this.btbCambiarContrasena.Click += new System.EventHandler(this.btbCambiarContrasena_Click);
+            // 
             // GUIPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -192,6 +238,8 @@
             this.Text = "GUIPrincipal";
             this.MenuVertical.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.panelTitulo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnCerrar)).EndInit();
@@ -215,5 +263,8 @@
         private System.Windows.Forms.Label lblLeyenda;
         private System.Windows.Forms.Label lblBienvenido;
         private System.Windows.Forms.Button btbCerrar;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.Button btbCambiarContrasena;
     }
 }

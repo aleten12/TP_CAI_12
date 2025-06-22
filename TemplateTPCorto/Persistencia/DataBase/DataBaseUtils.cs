@@ -198,6 +198,39 @@ namespace Persistencia.DataBase
                 Console.WriteLine($"Pila de errores: {e.StackTrace}");
             }
         }
+
+        public void RegistrarAutorizacion(string idOperacion, string tipoOperacion, string estado, string legajoSolicitante, string fechaSolicitud, string legajoAutorizador)
+        {
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Persistencia\DataBase\Tablas\", "autorizacion.csv");
+            rutaArchivo = Path.GetFullPath(rutaArchivo);
+
+            string fechaAutorizacion = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            // Crear la línea con separador tabulador
+            string nuevaLinea = string.Join("\t", new string[]
+            {
+        idOperacion,
+        tipoOperacion,
+        estado,
+        legajoSolicitante,
+        fechaSolicitud,
+        legajoAutorizador,
+        fechaAutorizacion
+            });
+
+            try
+            {
+                // Solo agregar la nueva línea (no tocar encabezado porque siempre existe)
+                File.AppendAllLines(rutaArchivo, new[] { nuevaLinea });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al registrar autorización:");
+                Console.WriteLine($"Mensaje: {e.Message}");
+            }
+        }
+
+
     }
 
 

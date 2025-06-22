@@ -125,19 +125,38 @@ namespace TemplateTPCorto
 
             string lineaSeleccionada = lstModificarPersonas.SelectedItem.ToString();
 
-            // Usamos el método del gestor en la capa negocio
             bool fueAplicada = gestorCambioPersona.AplicarCambioPersona(lineaSeleccionada);
 
             if (fueAplicada)
             {
                 lstModificarPersonas.Items.Remove(lstModificarPersonas.SelectedItem);
                 MessageBox.Show("Modificación aprobada y aplicada con éxito.");
+
+                // Registrar en autorizacion.csv
+                string[] campos = lineaSeleccionada.Split(';');
+                string idOperacion = campos[0];
+                string legajoSolicitante = campos[1];
+                string fechaSolicitud = campos.Length > 5 ? campos[5] : "-";
+                string legajoAutorizador = Credencial?.Legajo ?? "admin";
+                string fechaAutorizacion = DateTime.Now.ToString("dd/MM/yyyy");
+
+                new DataBaseUtils().AgregarRegistro("autorizacion.csv", string.Join(";", new string[]
+                {
+            idOperacion,
+            "CambioPersona",
+            "Aprobado",
+            legajoSolicitante,
+            fechaSolicitud,
+            legajoAutorizador,
+            fechaAutorizacion
+                }));
             }
             else
             {
                 MessageBox.Show("No se pudo aplicar la modificación. Verificá los datos.");
             }
         }
+
 
         private void btnRechazarModificacionPersona_Click(object sender, EventArgs e)
         {
@@ -174,12 +193,32 @@ namespace TemplateTPCorto
             {
                 lstCambioCredenciales.Items.Remove(lstCambioCredenciales.SelectedItem);
                 MessageBox.Show("Cambio aplicado correctamente.");
+
+                // Registrar en autorizacion.csv
+                string[] campos = lineaSeleccionada.Split(';');
+                string idOperacion = campos[0];
+                string legajoSolicitante = campos[1];
+                string fechaSolicitud = campos.Length > 5 ? campos[5] : "-";
+                string legajoAutorizador = Credencial?.Legajo ?? "admin";
+                string fechaAutorizacion = DateTime.Now.ToString("dd/MM/yyyy");
+
+                new DataBaseUtils().AgregarRegistro("autorizacion.csv", string.Join(";", new string[]
+                {
+            idOperacion,
+            "CambioCredencial",
+            "Aprobado",
+            legajoSolicitante,
+            fechaSolicitud,
+            legajoAutorizador,
+            fechaAutorizacion
+                }));
             }
             else
             {
                 MessageBox.Show("No se pudo aplicar el cambio.");
             }
         }
+
 
         private void btnRechazarcred_Click(object sender, EventArgs e)
         {

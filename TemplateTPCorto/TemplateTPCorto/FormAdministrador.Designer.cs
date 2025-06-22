@@ -49,7 +49,7 @@
             this.lstModificarPersonas.ItemHeight = 21;
             this.lstModificarPersonas.Location = new System.Drawing.Point(32, 106);
             this.lstModificarPersonas.Name = "lstModificarPersonas";
-            this.lstModificarPersonas.Size = new System.Drawing.Size(708, 277);
+            this.lstModificarPersonas.Size = new System.Drawing.Size(749, 277);
             this.lstModificarPersonas.TabIndex = 0;
             this.lstModificarPersonas.SelectedIndexChanged += new System.EventHandler(this.lstModificarPersonas_SelectedIndexChanged);
             // 
@@ -60,7 +60,7 @@
             this.lstCambioCredenciales.ItemHeight = 21;
             this.lstCambioCredenciales.Location = new System.Drawing.Point(32, 454);
             this.lstCambioCredenciales.Name = "lstCambioCredenciales";
-            this.lstCambioCredenciales.Size = new System.Drawing.Size(708, 277);
+            this.lstCambioCredenciales.Size = new System.Drawing.Size(749, 277);
             this.lstCambioCredenciales.TabIndex = 1;
             this.lstCambioCredenciales.SelectedIndexChanged += new System.EventHandler(this.lstCambioCredenciales_SelectedIndexChanged);
             // 
@@ -71,7 +71,7 @@
             this.btnAprobarModificacionPersona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAprobarModificacionPersona.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAprobarModificacionPersona.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(768, 106);
+            this.btnAprobarModificacionPersona.Location = new System.Drawing.Point(805, 106);
             this.btnAprobarModificacionPersona.Name = "btnAprobarModificacionPersona";
             this.btnAprobarModificacionPersona.Size = new System.Drawing.Size(234, 62);
             this.btnAprobarModificacionPersona.TabIndex = 2;
@@ -86,7 +86,7 @@
             this.btnRechazarModificacionPersona.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarModificacionPersona.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarModificacionPersona.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(768, 199);
+            this.btnRechazarModificacionPersona.Location = new System.Drawing.Point(805, 199);
             this.btnRechazarModificacionPersona.Name = "btnRechazarModificacionPersona";
             this.btnRechazarModificacionPersona.Size = new System.Drawing.Size(234, 62);
             this.btnRechazarModificacionPersona.TabIndex = 3;
@@ -101,7 +101,7 @@
             this.btnActualizarCredencial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizarCredencial.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizarCredencial.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnActualizarCredencial.Location = new System.Drawing.Point(771, 453);
+            this.btnActualizarCredencial.Location = new System.Drawing.Point(808, 453);
             this.btnActualizarCredencial.Name = "btnActualizarCredencial";
             this.btnActualizarCredencial.Size = new System.Drawing.Size(231, 62);
             this.btnActualizarCredencial.TabIndex = 4;
@@ -116,7 +116,7 @@
             this.btnRechazarcred.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRechazarcred.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazarcred.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnRechazarcred.Location = new System.Drawing.Point(771, 553);
+            this.btnRechazarcred.Location = new System.Drawing.Point(808, 553);
             this.btnRechazarcred.Name = "btnRechazarcred";
             this.btnRechazarcred.Size = new System.Drawing.Size(231, 62);
             this.btnRechazarcred.TabIndex = 5;
@@ -146,7 +146,7 @@
             // 
             // btnCambiarContraseña_Click
             // 
-            this.btnCambiarContraseña_Click.Location = new System.Drawing.Point(771, 667);
+            this.btnCambiarContraseña_Click.Location = new System.Drawing.Point(808, 667);
             this.btnCambiarContraseña_Click.Name = "btnCambiarContraseña_Click";
             this.btnCambiarContraseña_Click.Size = new System.Drawing.Size(139, 62);
             this.btnCambiarContraseña_Click.TabIndex = 8;

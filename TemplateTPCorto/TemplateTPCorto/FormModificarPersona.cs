@@ -38,28 +38,32 @@ namespace TemplateTPCorto
                 MessageBox.Show("Se debe seleccionar un legajo.");
                 return;
             }
-
-            DateTime fecha;
-            if (DateTime.TryParse(txbFechaIngreso.Text, out fecha))
-            {
-                string fechaFormateada = fecha.ToString("d/M/yyyy");
-                
-            }
-            else
-            {
-                MessageBox.Show("La fecha ingresada no tiene un formato válido.");
-            }
-
-
             string legajo = cbxLegajos.SelectedItem.ToString();
             string nombre = txbNombre.Text.Trim();
             string apellido = txbApellido.Text.Trim();
             string dni = txbDni.Text.Trim();
-            string fechaIngreso = fecha.ToString("d/M/yyyy");
+         
+            string fechaIngreso = "";
+
+            if (!string.IsNullOrWhiteSpace(txbFechaIngreso.Text))
+            {
+                DateTime fecha;
+                if (DateTime.TryParse(txbFechaIngreso.Text, out fecha))
+                {
+                    fechaIngreso = fecha.ToString("d/M/yyyy");
+                }
+                else
+                {
+                    MessageBox.Show("La fecha ingresada no tiene un formato válido.");
+                    return;
+                }
+            }
 
             ModificarPersona mp = new ModificarPersona();
             mp.RegistrarLinea(legajo, nombre, apellido, dni, fechaIngreso);
             MessageBox.Show("La modificación fue registrada para su aprobación.");
+
+            Limpiar();
         }
 
         private void FormModificarPersona_Load(object sender, EventArgs e)
@@ -74,6 +78,14 @@ namespace TemplateTPCorto
 
         }
 
+        private void Limpiar()
+        {
+            txbApellido.Clear();
+            txbDni.Clear();
+            txbFechaIngreso.Clear();
+            txbNombre.Clear();
+            cbxLegajos.Text = "";
+        }
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
